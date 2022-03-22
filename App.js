@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   itemFooter:{
     paddingHorizontal: 5,
   },
-
+});
