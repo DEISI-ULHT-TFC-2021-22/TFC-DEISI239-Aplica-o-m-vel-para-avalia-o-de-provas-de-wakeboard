@@ -5,3 +5,5 @@ This app was created by Maximilian in: https://www.udemy.com/course/react-native
 
 
 The objetive here is to learn React Native togheter with the course, and later add my own identity to it!
+"# JudgingApp" 
+"# JudgingApp" 
