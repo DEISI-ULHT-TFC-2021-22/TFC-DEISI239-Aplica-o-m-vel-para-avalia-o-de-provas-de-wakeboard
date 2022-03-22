@@ -1,69 +1,163 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 
-import Header from './components/Header';
-import StartGameScreen from './screens/StartGameScreen';
-import GameScreen from './screens/GameScreen';
-import GameOverScreen from './screens/GameOverScreen';
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-  });
-}
 
 export default function App() {
-  const[userNumber, setUserNumber] = useState();
-  const[guessRounds, setGuessRounds] = useState(0);
-  const [dataLoaded, setDataLoaded] = useState(false);
-
-  if(!dataLoaded){
-    return (
-      <AppLoading 
-        startAsync={fetchFonts} 
-        onFinish={() => setDataLoaded(true)}
-        onError={(err) => console.log(err)}
-      />
-    );
-  }
-
-  const configureNewGameHandler = () => {
-    setGuessRounds(0);
-    setUserNumber(null);
-  }
-
-  const startGameHandler = (selectedNumber) => {
-    setUserNumber(selectedNumber);
-  };
-
-  const gameOverHandler = numOfRounds => {
-    setGuessRounds(numOfRounds)
-  }
-
-  let content = <StartGameScreen onStartGame={startGameHandler} />;
-
-  if(userNumber && guessRounds <= 0){
-    content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />;
-  } else if(guessRounds > 0){
-    content = <GameOverScreen 
-    roundsNumber={guessRounds} 
-    userNumber={userNumber} 
-    onRestart={configureNewGameHandler} />;
-  }
-
   return (
-    <View style={styles.screen}>
-      <Header title={"Guess a Number"} />
-      {content}
+    <View>
+
+      <View style={styles.header}>
+        {/*Input do atleta*/}
+        <View>
+            <Text>Nome do Atleta</Text>
+            <TextInput/>
+        </View>
+
+        {/*Input do front foot*/}
+        <View>
+            <Text>Front Foot</Text>
+          <TextInput/>
+        </View>
+      </View>
+
+      {/*Histórico de manobras*/}
+      <View>
+        <View style={styles.histText}>
+          <Text>Histórico de manobras</Text>
+        </View>
+        <View style={styles.hist}>
+          <View style={styles.item}>
+            <Button title="HS Back"/>
+          </View>
+          <View style={styles.item}>
+            <Button title="HS Front"/>
+          </View>
+          <View style={styles.item}>
+            <Button title="Tantrum"/>
+          </View>
+          <View style={styles.item}>
+            <Button title="HS Raley"/>
+          </View>
+        </View>
+      </View>
+
+      {/*Manobra*/}
+      <View style={styles.both}>
+        <View style={styles.containerM}>
+          EXEMPLO MANOBRA
+        </View>
+
+        <View style={styles.containerP}>
+          EXEMPLO PONTUAÇÃO
+        </View>
+      </View>
+
+
+      <View style={styles.footer}>
+        {/*Footer = Onda + Altura + ??*/}
+        <View>
+          <Text>Onda</Text>
+          
+            <View style={styles.histFooter}>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+            </View>
+
+        </View>
+
+        <View>
+          <Text>Altura</Text>
+
+          <View style={styles.histFooter}>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+              <View style={styles.itemFooter}>
+                <Button title="Icon"/>
+              </View>
+            </View>
+
+        </View>
+      </View>
+
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen:{
+  header: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 15,
   },
-});
+
+  histText: {
+    paddingHorizontal: 15,
+    paddingTop: 15,
+  },
+
+  hist: { 
+    flex: 1,
+    flexDirection: 'row',
+    padding: 15,
+  },
+
+  item:{
+    paddingHorizontal: 5,
+  },
+
+  both: {
+    flexDirection: 'row',
+  },
+
+  containerM:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 50,
+    margin: 10,
+    width: 670,
+    height: 200,
+  },
+
+  containerP:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 50,
+    margin: 10,
+    width: 115,
+    height: 200,
+  },
+
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 15,
+  },
+
+  histFooter: { 
+    flex: 1,
+    flexDirection: 'row',
+    padding: 15,
+  },
+
+  itemFooter:{
+    paddingHorizontal: 5,
+  },
+
