@@ -1,7 +1,24 @@
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 
 const Header = props => {
+
+    const [buttonPressedL, setButtonPressedL] = useState(true);
+    const [buttonPressedR, setButtonPressedR] = useState(true);
+
+    const selectFoot = (buttonText) => {
+        if(buttonText == "L"){
+            setButtonPressedL(false)
+        }else{
+            setButtonPressedL(true)
+        }
+        if(buttonText == "R"){
+            setButtonPressedR(false)
+        }else{
+            setButtonPressedR(true)
+        }
+    }
+
     return (
         <View style={styles.both}>
             <View style={styles.containerName}>
@@ -15,10 +32,20 @@ const Header = props => {
                 <Text style={styles.text}>Front Foot</Text>
                 <View style={styles.containerButton}>
                     <View style={styles.button}>
-                        <Button title="R"/>
+                        <TouchableHighlight
+                            underlayColor='none'
+                            style={ buttonPressedR? styles.buttonFoot : styles.buttonPressed}
+                            onPress={() => selectFoot("R")}>
+                            <View><Text style={styles.buttonText}>R</Text></View>
+                        </TouchableHighlight>
                     </View>
                     <View style={styles.button}>
-                        <Button title="L"/>
+                        <TouchableHighlight
+                            underlayColor='none'
+                            style={ buttonPressedL? styles.buttonFoot : styles.buttonPressed}
+                            onPress={() => selectFoot("L")}>
+                            <View><Text style={styles.buttonText}>L</Text></View>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>
@@ -43,12 +70,13 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
 
-    inputName:{
+    inputName: {
         height: 25,
         borderWidth: 1,
         borderColor: 'black',
         paddingStart: 5,
     },
+
     containerFoot: {
         flexDirection: 'column',
         padding: 15,
@@ -64,6 +92,31 @@ const styles = StyleSheet.create({
         width: 50,
         marginRight: 10,
     },
+
+    buttonFoot: {
+        backgroundColor: "dodgerblue",
+        paddingVertical: 6,
+        paddingHorizontal: 15,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: "white",
+    },
+
+    buttonPressed:{
+        backgroundColor: "dodgerblue",
+        paddingVertical: 6,
+        paddingHorizontal: 15,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: "black",
+    },
+
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+
 });
 
 export default Header;

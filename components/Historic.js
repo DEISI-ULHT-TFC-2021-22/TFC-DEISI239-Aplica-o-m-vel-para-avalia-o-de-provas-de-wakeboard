@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
 const Historic = props => {
     return (
@@ -9,16 +9,32 @@ const Historic = props => {
             </View>
             <View style={styles.hist}>
                 <View style={styles.item}>
-                    <Button title="HS Back" />
+                    <TouchableHighlight
+                        underlayColor='none'
+                        style={styles.button}>
+                        <View><Text style={styles.buttonText}>HS Back</Text></View>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.item}>
-                    <Button title="HS Front" />
+                    <TouchableHighlight
+                        underlayColor='none'
+                        style={styles.button}>
+                        <View><Text style={styles.buttonText}>HS Front</Text></View>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.item}>
-                    <Button title="Tantrum" />
+                    <TouchableHighlight
+                        underlayColor='none'
+                        style={styles.button}>
+                        <View><Text style={styles.buttonText}>Tantrum</Text></View>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.item}>
-                    <Button title="HS Raley" />
+                    <TouchableHighlight
+                        underlayColor='none'
+                        style={styles.button}>
+                        <View><Text style={styles.buttonText}>HS Raley</Text></View>
+                    </TouchableHighlight>
                 </View>
             </View>
         </View>
@@ -40,6 +56,21 @@ const styles = StyleSheet.create({
 
     item: {
         paddingHorizontal: 5,
+    },
+
+    button: {
+        backgroundColor: "dodgerblue",
+        paddingVertical: 6,
+        paddingHorizontal: 15,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: "white",
+    },
+
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
 });
 
