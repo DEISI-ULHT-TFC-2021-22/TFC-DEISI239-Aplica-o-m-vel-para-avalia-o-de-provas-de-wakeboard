@@ -90,9 +90,9 @@ class JudgeSheetFragment : Fragment() {
     }
 
     private fun onItemClick(trick: String) {
-        setPopUp()
-        /*athleteViewModel.addHistory(trick)
-        athleteViewModel.getHistory{ updateListHistory(it) }*/
+        //setPopUp()
+        athleteViewModel.addHistory(trick)
+        athleteViewModel.getHistory{ updateListHistory(it) }
     }
 
     private fun updateListRaley(raleyList : List<String>){
