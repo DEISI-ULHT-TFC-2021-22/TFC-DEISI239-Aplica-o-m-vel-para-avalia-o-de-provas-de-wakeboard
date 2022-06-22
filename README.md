@@ -1,2 +1,2 @@
 # JudgingApp
-React Native App, final college project
+Android App, final college project
