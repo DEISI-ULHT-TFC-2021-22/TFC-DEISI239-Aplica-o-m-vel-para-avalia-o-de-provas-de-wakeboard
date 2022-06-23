@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import tfc2022.judgingapp_21800876.R
-import tfc2022.judgingapp_21800876.AthleteViewModel
+import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentAddAthleteBinding
 
 private lateinit var binding : FragmentAddAthleteBinding
-private lateinit var athleteViewModel : AthleteViewModel
+private lateinit var viewModel : ViewModel
 
 class AddAthleteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,7 +30,7 @@ class AddAthleteFragment : Fragment() {
         binding = FragmentAddAthleteBinding.bind(view)
 
         //ViewModel
-        athleteViewModel = ViewModelProvider(this)[AthleteViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
         return binding.root
     }
 
@@ -86,7 +86,7 @@ class AddAthleteFragment : Fragment() {
         val frontfoot = binding.spinnerFrontFoot.selectedItem.toString()
         val country = binding.spinnerCountry.selectedItem.toString()
 
-        athleteViewModel.addAthlete(Athlete(name,age,category,frontfoot,country))
+        viewModel.addAthlete(Athlete(name,age,category,frontfoot,country))
 
         Toast.makeText(activity, "Athlete registered!", Toast.LENGTH_SHORT).show()
         binding.nameInput.text.clear()

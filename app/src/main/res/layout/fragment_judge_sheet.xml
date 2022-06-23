@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/linearLayoutBeforeMain"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="75dp">
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:id="@+id/linearLayout0"
@@ -99,7 +100,7 @@
                 android:id="@+id/historic_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tricks History" />
+                android:text="@string/history" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/history_list"
@@ -128,7 +129,7 @@
                     android:id="@+id/raleys_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Raleys"
+                    android:text="@string/raleys"
                     android:textAlignment="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -150,7 +151,7 @@
                     android:id="@+id/tantrums_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tantrums"
+                    android:text="@string/tantrums"
                     android:textAlignment="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -172,7 +173,7 @@
                     android:id="@+id/rolls_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rolls"
+                    android:text="@string/rolls"
                     android:textAlignment="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -180,6 +181,125 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:padding="25dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/execution"
+                    android:textAlignment="center"/>
+
+                <EditText
+                    android:id="@+id/execution_input"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck"
+                    android:background="@drawable/points_border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intensity"
+                    android:textAlignment="center"/>
+
+                <EditText
+                    android:id="@+id/intensity_input"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck"
+                    android:background="@drawable/points_border"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/comprehension"
+                    android:textAlignment="center"/>
+
+                <EditText
+                    android:id="@+id/comprehension_input"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck"
+                    android:background="@drawable/points_border"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_fall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/fall_button"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/finish_button"/>
 
             </LinearLayout>
 

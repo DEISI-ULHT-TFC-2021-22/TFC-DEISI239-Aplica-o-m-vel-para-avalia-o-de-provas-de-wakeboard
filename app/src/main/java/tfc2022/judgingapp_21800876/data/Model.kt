@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AthleteModel(private val dao: AthleteDao) {
+class Model(private val dao: AthleteDao) {
 
     private val raleys = listOf(
         "TS Raley", "Batwing", "Batwing to blind", "90210", "Oh Really",
@@ -35,9 +35,7 @@ class AthleteModel(private val dao: AthleteDao) {
 
     private val history = mutableListOf<String>()
 
-    private val athletes = mutableListOf(
-        Athlete("Matheus","21","Open Division (Open Men)","Right","Brazil")
-    )
+    val athleteListOfTricks = mutableListOf<String>()
 
     fun getRaleys(onFinished: (List<String>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -65,6 +63,10 @@ class AthleteModel(private val dao: AthleteDao) {
 
     fun addHistory(trick : String){
         history.add(trick)
+    }
+
+    fun addListOfTricks(trick : String){
+        athleteListOfTricks.add(trick)
     }
 
     fun addAthlete(athlete : Athlete){

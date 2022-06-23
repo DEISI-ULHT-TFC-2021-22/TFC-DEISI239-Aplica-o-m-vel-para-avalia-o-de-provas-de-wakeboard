@@ -10,4 +10,11 @@ data class Athlete(
     var category: String,
     var frontfoot: String,
     var country: String,
+    var tricks: MutableList<String> = mutableListOf(),
+    //Pode ser outra Classe
+    var fall: Boolean = false,
+    var execution: String = "",
+    var intensity: String = "",
+    var comprehension: String = "",
+    var score: Double = 0.0
 ) : Parcelable
