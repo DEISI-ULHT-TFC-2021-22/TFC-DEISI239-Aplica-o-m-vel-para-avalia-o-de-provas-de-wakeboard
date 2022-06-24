@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/linearLayoutBeforeMain"
+<ScrollView
+    android:id="@+id/scrollView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,22 +33,6 @@
 
             <TextView
                 android:id="@+id/athlete_info_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:paddingEnd="5dp"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/age_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/age_label"
-                android:paddingEnd="5dp"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/athlete_info_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -208,6 +192,7 @@
                 <EditText
                     android:id="@+id/execution_input"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:importantForAutofill="no"
@@ -232,6 +217,7 @@
                 <EditText
                     android:id="@+id/intensity_input"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:importantForAutofill="no"
@@ -256,6 +242,7 @@
                 <EditText
                     android:id="@+id/comprehension_input"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:importantForAutofill="no"
@@ -271,7 +258,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:padding="25dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -307,4 +295,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

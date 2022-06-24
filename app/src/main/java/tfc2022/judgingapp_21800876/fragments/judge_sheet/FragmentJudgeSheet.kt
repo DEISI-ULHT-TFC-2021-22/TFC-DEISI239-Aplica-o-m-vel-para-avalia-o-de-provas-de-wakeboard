@@ -31,7 +31,7 @@ class JudgeSheetFragment : Fragment() {
     private val adapterRoll = AdapterRollList(onClick = ::onItemClick)
     private val adapterHistory = AdapterHistoryList()
     private lateinit var popup : View
-    private lateinit var background : LinearLayout
+    private lateinit var background : ScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class JudgeSheetFragment : Fragment() {
 
         //Layout
         val view = inflater.inflate(R.layout.fragment_judge_sheet, container, false)
-        background = view.findViewById(R.id.linearLayoutBeforeMain) as LinearLayout
+        background = view.findViewById(R.id.scrollView) as ScrollView
         background.setBackgroundColor(Color.WHITE)
         popup = inflater.inflate(R.layout.trick_popup, container, false)
 
@@ -75,27 +75,43 @@ class JudgeSheetFragment : Fragment() {
 
         athlete?.let{
             binding.athleteInfoName.text = it.name
-            binding.athleteInfoAge.text = it.age
             binding.athleteInfoCountry.text = it.country
             binding.athleteInfoFrontFoot.text = it.frontfoot
         }
 
-        binding.buttonFinish.setOnClickListener { finishJudgSheet() }
+        binding.buttonFinish.setOnClickListener { finishJudgeSheet() }
         binding.buttonFall.setOnClickListener { fallJudgeSheet() }
     }
 
     private fun fallJudgeSheet(){
         athlete?.fall = true
+        athlete?.let { viewModel.addToLeaderboardList(it) }
         NavigationManager.goToLeaderboardFragment(parentFragmentManager)
     }
 
-    private fun finishJudgSheet(){
-        athlete?.tricks = viewModel.getAthleteListOfTricks()
-        athlete?.execution = binding.executionInput.text.toString()
-        athlete?.intensity = binding.intensityInput.text.toString()
-        athlete?.comprehension = binding.comprehensionInput.text.toString()
-        athlete?.score = calculateScore(athlete?.execution, athlete?.intensity, athlete?.comprehension)
-        NavigationManager.goToLeaderboardFragment(parentFragmentManager)
+    private fun finishJudgeSheet(){
+        if(validadeJudgeSheet()) {
+            athlete?.tricks = viewModel.getAthleteListOfTricks()
+            athlete?.execution = binding.executionInput.text.toString()
+            athlete?.intensity = binding.intensityInput.text.toString()
+            athlete?.comprehension = binding.comprehensionInput.text.toString()
+            athlete?.score = calculateScore(athlete?.execution, athlete?.intensity, athlete?.comprehension)
+            athlete?.let { viewModel.addToLeaderboardList(it) }
+            NavigationManager.goToLeaderboardFragment(parentFragmentManager)
+        }
+    }
+
+    private fun validadeJudgeSheet(): Boolean {
+        if(binding.executionInput.text.toString() == "" || binding.intensityInput.text.toString() == ""
+            || binding.comprehensionInput.text.toString() == ""){
+            Toast.makeText(activity, "Cannot save Sheet without a score", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(viewModel.getAthleteListOfTricks().size == 0){
+            Toast.makeText(activity, "Cannot save Sheet without tricks", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
     private fun calculateScore(execution: String?, intensity: String?, comprehension: String?): Double {

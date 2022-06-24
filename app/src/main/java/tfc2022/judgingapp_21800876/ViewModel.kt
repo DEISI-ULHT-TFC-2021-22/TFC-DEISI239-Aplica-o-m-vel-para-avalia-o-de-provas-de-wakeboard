@@ -51,6 +51,14 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         return model.athleteListOfTricks
     }
 
+    fun addToLeaderboardList(athlete: Athlete){
+        return model.addToLeaderboardList(athlete)
+    }
+
+    fun getLeaderboard(): MutableList<Athlete> {
+        return model.leaderboardList
+    }
+
     fun getAthletes(callback: (List<Athlete>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             model.getAthletes(callback)

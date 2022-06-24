@@ -6,12 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.R
+import tfc2022.judgingapp_21800876.ViewModel
+import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentLeaderboardBinding
 
 private lateinit var binding : FragmentLeaderboardBinding
+private lateinit var viewModel : ViewModel
 
 class LeaderboardFragment : Fragment() {
+    private val adapterLeaderboard = AdapterLeaderboardList()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //Fragment Title
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.title_leaderboard)
@@ -21,6 +31,16 @@ class LeaderboardFragment : Fragment() {
 
         //Binding
         binding = FragmentLeaderboardBinding.bind(view)
+
+        //ViewModel
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.leaderboardList.layoutManager = LinearLayoutManager(requireContext())
+        binding.leaderboardList.adapter = adapterLeaderboard
+        viewModel.getLeaderboard()
     }
 }

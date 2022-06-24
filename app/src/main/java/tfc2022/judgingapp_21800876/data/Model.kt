@@ -3,6 +3,7 @@ package tfc2022.judgingapp_21800876.data
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class Model(private val dao: AthleteDao) {
 
@@ -37,6 +38,8 @@ class Model(private val dao: AthleteDao) {
 
     val athleteListOfTricks = mutableListOf<String>()
 
+    val leaderboardList = mutableListOf<Athlete>()
+
     fun getRaleys(onFinished: (List<String>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             onFinished(raleys)
@@ -67,6 +70,10 @@ class Model(private val dao: AthleteDao) {
 
     fun addListOfTricks(trick : String){
         athleteListOfTricks.add(trick)
+    }
+
+    fun addToLeaderboardList(athlete: Athlete){
+        leaderboardList.add(athlete)
     }
 
     fun addAthlete(athlete : Athlete){
