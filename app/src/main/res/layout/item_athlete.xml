@@ -6,14 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/trick_card"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <TextView
-        android:id="@+id/athlete_name"
+        android:id="@+id/athlete_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textAlignment="center"/>
-
 
 </LinearLayout>

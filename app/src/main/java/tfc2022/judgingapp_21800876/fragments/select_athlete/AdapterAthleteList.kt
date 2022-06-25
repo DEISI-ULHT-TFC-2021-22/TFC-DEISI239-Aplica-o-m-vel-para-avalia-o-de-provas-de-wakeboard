@@ -22,7 +22,10 @@ class AdapterAthleteList (
     }
 
     override fun onBindViewHolder(holder: AthleteListViewHolder, position: Int) {
-        holder.binding.athleteName.text = items[position].name
+        val stringAthlete = items[position].name + " from " + items[position].country + " in the " +
+                items[position].category + " category"
+
+        holder.binding.athleteString.text = stringAthlete
 
         holder.binding.athlete.setOnClickListener{ onClick(items[position]) }
     }

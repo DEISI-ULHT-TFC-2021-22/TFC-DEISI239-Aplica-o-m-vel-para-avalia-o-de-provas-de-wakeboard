@@ -11,30 +11,21 @@
         android:id="@+id/linearLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="75dp">
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/foto_label"
-            android:orientation="vertical"
-            android:src="@drawable/foto_input" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/name_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/name_label" />
+                android:text="@string/name_label"
+                android:textSize="25sp"/>
 
             <EditText
                 android:id="@+id/name_input"
@@ -42,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:textSize="25sp"
                 tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
         </LinearLayout>
@@ -51,13 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/age_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/age_label" />
+                android:text="@string/age_label"
+                android:textSize="25sp"/>
 
             <EditText
                 android:id="@+id/age_input"
@@ -65,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="number"
+                android:textSize="25sp"
                 tools:ignore="LabelFor,SpeakableTextPresentCheck" />
 
         </LinearLayout>
@@ -74,13 +68,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/front_foot_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/front_foot_label" />
+                android:text="@string/front_foot_label"
+                android:textSize="25sp"/>
 
             <Spinner
                 android:id="@+id/spinnerFront_Foot"
@@ -96,13 +91,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/category_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/category_label" />
+                android:text="@string/category_label"
+                android:textSize="25sp"/>
 
             <Spinner
                 android:id="@+id/spinnerCategory"
@@ -118,20 +114,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/country_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/country_label" />
+                android:text="@string/country_label"
+                android:textSize="25sp"/>
 
-            <Spinner
-                android:id="@+id/spinnerCountry"
+            <AutoCompleteTextView
+                android:id="@+id/country_input"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:textSize="25sp"
+                tools:ignore="LabelFor" />
 
         </LinearLayout>
 
@@ -141,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:text="@string/button_save" />
+            android:text="@string/button_save" 
+            android:textSize="25sp"/>
 
     </LinearLayout>
 

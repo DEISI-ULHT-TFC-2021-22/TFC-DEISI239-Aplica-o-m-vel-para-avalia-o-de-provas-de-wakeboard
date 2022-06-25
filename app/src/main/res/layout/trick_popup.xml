@@ -23,39 +23,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/confirm_trick_stats"
+                android:textSize="25sp"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="25sp"
                 android:text="@string/trick_name" />
 
             <TextView
                 android:id="@+id/trick_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textSize="25sp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="25sp"
                 android:text="@string/trick_height" />
 
             <TextView
                 android:id="@+id/trick_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/blank"/>
+                android:textSize="25sp"
+                android:text="@string/blank"
+                android:paddingBottom="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="25sp"
                 android:text="@string/trick_wave" />
 
             <TextView
                 android:id="@+id/trick_wave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/blank"/>
+                android:textSize="25sp"
+                android:text="@string/blank"
+                android:paddingBottom="15dp"/>
 
         </LinearLayout>
 
@@ -75,7 +85,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/trick_define_heitght"
-                    android:textAlignment="center"/>
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:paddingBottom="10dp"/>
 
             </LinearLayout>
 
@@ -89,7 +101,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/trick_define_wave"
-                    android:textAlignment="center"/>
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:paddingBottom="10dp"/>
 
             </LinearLayout>
 
@@ -222,6 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="25sp"
                     android:text="@string/cancel_button"/>
 
             </LinearLayout>
@@ -237,6 +252,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="25sp"
                     android:text="@string/confirm_button"/>
 
             </LinearLayout>
