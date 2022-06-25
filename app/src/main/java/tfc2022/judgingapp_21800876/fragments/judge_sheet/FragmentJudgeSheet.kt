@@ -99,9 +99,9 @@ class JudgeSheetFragment : Fragment() {
 
             viewModel.updateTricks(athlete.tricks, athlete.name)
 
-            viewModel.updateExecution(athlete.tricks, athlete.name)
-            viewModel.updateIntensity(athlete.tricks, athlete.name)
-            viewModel.updateComprehension(athlete.tricks, athlete.name)
+            viewModel.updateExecution(athlete.execution, athlete.name)
+            viewModel.updateIntensity(athlete.intensity, athlete.name)
+            viewModel.updateComprehension(athlete.comprehension, athlete.name)
 
             viewModel.updateScore(athlete.score, athlete.name)
 
@@ -122,8 +122,8 @@ class JudgeSheetFragment : Fragment() {
         return true
     }
 
-    private fun calculateScore(execution: String?, intensity: String?, comprehension: String?): Double {
-        return (execution?.toDouble()!! + intensity?.toDouble()!! + comprehension?.toDouble()!!) * 3.33
+    private fun calculateScore(execution: String, intensity: String, comprehension: String): Double {
+        return (execution.toDouble() + intensity.toDouble() + comprehension.toDouble()) * 3.33
     }
 
     private fun setPopUp(trick : String) {

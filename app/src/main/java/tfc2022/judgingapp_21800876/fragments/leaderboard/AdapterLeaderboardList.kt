@@ -21,9 +21,19 @@ class AdapterLeaderboardList (
     }
 
     override fun onBindViewHolder(holder: LeaderboardListViewHolder, position: Int) {
-        holder.binding.athleteName.text = items[position].name
-        holder.binding.athleteTricks.text = items[position].tricks
-        holder.binding.athleteScore.text = items[position].score.toString()
+        val stringName = "Athlete: " + items[position].name
+        val stringTricks = "Tricks Performed: " + items[position].tricks
+
+        holder.binding.athleteName.text = stringName
+        holder.binding.athleteTricks.text = stringTricks
+
+        val stringScore = "Execution: " + items[position].execution + " Intensity: " +
+                items[position].intensity + " Comprehension: " + items[position].comprehension
+
+        val stringFinalScore = "Final Score is " + items[position].score
+
+        holder.binding.athleteScore.text = stringScore
+        holder.binding.athleteFinalScore.text = stringFinalScore
     }
 
     override fun getItemCount() = items.size

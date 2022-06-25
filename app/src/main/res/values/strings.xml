@@ -305,7 +305,7 @@
     <string name="trick_height_medium">Medium</string>
     <string name="trick_height_down">Down</string>
     <string name="trick_wave_left">Left</string>
-    <string name="trick_wave_up">Up</string>
+    <string name="trick_wave_up">Top</string>
     <string name="trick_wave_right">Right</string>
 
 </resources>

@@ -3,6 +3,7 @@ package tfc2022.judgingapp_21800876.data
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class Model(private val dao: AthleteDao) {
 
@@ -66,7 +67,7 @@ class Model(private val dao: AthleteDao) {
     }
 
     fun addListOfTricks(trick : String){
-        athleteListOfTricks += "$trick,"
+        athleteListOfTricks += "$trick, "
     }
 
     fun addAthlete(athlete : Athlete){
@@ -81,6 +82,11 @@ class Model(private val dao: AthleteDao) {
     fun getAthletes(onFinished: (List<Athlete>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             val athletes = dao.getAll()
+
+            Collections.sort(athletes, Comparator<AthleteRoom> { obj1, obj2 ->
+                obj2.score.compareTo(obj1.score)
+            })
+
             onFinished(athletes.map{
                 Athlete(it.athlete_name, it.age, it.category, it.frontfoot, it.country,
                 it.tricks, it.fall, it.execution, it.intensity, it.comprehension, it.score)
