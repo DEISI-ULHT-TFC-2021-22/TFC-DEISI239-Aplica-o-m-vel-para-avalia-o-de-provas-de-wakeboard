@@ -47,16 +47,8 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         model.addListOfTricks(trick)
     }
 
-    fun getAthleteListOfTricks(): MutableList<String> {
+    fun getAthleteListOfTricks(): String {
         return model.athleteListOfTricks
-    }
-
-    fun addToLeaderboardList(athlete: Athlete){
-        return model.addToLeaderboardList(athlete)
-    }
-
-    fun getLeaderboard(): MutableList<Athlete> {
-        return model.leaderboardList
     }
 
     fun getAthletes(callback: (List<Athlete>) -> Unit) {
@@ -67,5 +59,25 @@ class ViewModel(application: Application) : AndroidViewModel(application){
 
     fun addAthlete(athlete : Athlete){
         model.addAthlete(athlete)
+    }
+
+    fun updateTricks(tricks : String, name : String){
+        model.updateTricks(tricks, name)
+    }
+
+    fun updateExecution(execution : String, name : String){
+        model.updateExecution(execution, name)
+    }
+
+    fun updateIntensity(intensity : String, name : String){
+        model.updateIntensity(intensity, name)
+    }
+
+    fun updateComprehension(comprehension : String, name : String){
+        model.updateComprehension(comprehension, name)
+    }
+
+    fun updateScore(score : Double, name : String){
+        model.updateScore(score, name)
     }
 }

@@ -41,6 +41,12 @@ class LeaderboardFragment : Fragment() {
         super.onStart()
         binding.leaderboardList.layoutManager = LinearLayoutManager(requireContext())
         binding.leaderboardList.adapter = adapterLeaderboard
-        viewModel.getLeaderboard()
+        viewModel.getAthletes{ updateListLeaderboard(it) }
+    }
+
+    private fun updateListLeaderboard(athleteList : List<Athlete>){
+        CoroutineScope(Dispatchers.Main).launch {
+            adapterLeaderboard.updateItems(athleteList)
+        }
     }
 }

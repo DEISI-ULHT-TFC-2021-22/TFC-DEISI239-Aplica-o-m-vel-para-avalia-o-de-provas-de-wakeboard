@@ -86,7 +86,8 @@ class AddAthleteFragment : Fragment() {
         val frontfoot = binding.spinnerFrontFoot.selectedItem.toString()
         val country = binding.spinnerCountry.selectedItem.toString()
 
-        viewModel.addAthlete(Athlete(name,age,category,frontfoot,country))
+        viewModel.addAthlete(Athlete(name,age,category,frontfoot,country,"", false,
+            "", "", "", 0.0))
 
         Toast.makeText(activity, "Athlete registered!", Toast.LENGTH_SHORT).show()
         binding.nameInput.text.clear()

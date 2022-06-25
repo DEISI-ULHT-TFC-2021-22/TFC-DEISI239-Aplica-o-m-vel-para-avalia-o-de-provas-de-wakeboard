@@ -25,7 +25,7 @@ private lateinit var viewModel : ViewModel
 private const val ARG_ATH = "ARG_ATH"
 
 class JudgeSheetFragment : Fragment() {
-    private var athlete : Athlete? = null
+    private lateinit var athlete : Athlete
     private val adapterRaley = AdapterRaleyList(onClick = ::onItemClick)
     private val adapterTantrum = AdapterTantrumList(onClick = ::onItemClick)
     private val adapterRoll = AdapterRollList(onClick = ::onItemClick)
@@ -35,7 +35,7 @@ class JudgeSheetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let { athlete = it.getParcelable(ARG_ATH) }
+        arguments?.let { athlete = it.getParcelable(ARG_ATH)!! }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -73,7 +73,7 @@ class JudgeSheetFragment : Fragment() {
         binding.historyList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.historyList.adapter = adapterHistory
 
-        athlete?.let{
+        athlete.let{
             binding.athleteInfoName.text = it.name
             binding.athleteInfoCountry.text = it.country
             binding.athleteInfoFrontFoot.text = it.frontfoot
@@ -84,19 +84,27 @@ class JudgeSheetFragment : Fragment() {
     }
 
     private fun fallJudgeSheet(){
-        athlete?.fall = true
-        athlete?.let { viewModel.addToLeaderboardList(it) }
+        athlete.fall = true
         NavigationManager.goToLeaderboardFragment(parentFragmentManager)
     }
 
     private fun finishJudgeSheet(){
         if(validadeJudgeSheet()) {
-            athlete?.tricks = viewModel.getAthleteListOfTricks()
-            athlete?.execution = binding.executionInput.text.toString()
-            athlete?.intensity = binding.intensityInput.text.toString()
-            athlete?.comprehension = binding.comprehensionInput.text.toString()
-            athlete?.score = calculateScore(athlete?.execution, athlete?.intensity, athlete?.comprehension)
-            athlete?.let { viewModel.addToLeaderboardList(it) }
+            athlete.tricks = viewModel.getAthleteListOfTricks()
+            athlete.execution = binding.executionInput.text.toString()
+            athlete.intensity = binding.intensityInput.text.toString()
+            athlete.comprehension = binding.comprehensionInput.text.toString()
+            athlete.score =
+                calculateScore(athlete.execution, athlete.intensity, athlete.comprehension)
+
+            viewModel.updateTricks(athlete.tricks, athlete.name)
+
+            viewModel.updateExecution(athlete.tricks, athlete.name)
+            viewModel.updateIntensity(athlete.tricks, athlete.name)
+            viewModel.updateComprehension(athlete.tricks, athlete.name)
+
+            viewModel.updateScore(athlete.score, athlete.name)
+
             NavigationManager.goToLeaderboardFragment(parentFragmentManager)
         }
     }
@@ -107,7 +115,7 @@ class JudgeSheetFragment : Fragment() {
             Toast.makeText(activity, "Cannot save Sheet without a score", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(viewModel.getAthleteListOfTricks().size == 0){
+        if(viewModel.getAthleteListOfTricks().isEmpty()){
             Toast.makeText(activity, "Cannot save Sheet without tricks", Toast.LENGTH_SHORT).show()
             return false
         }
