@@ -10,4 +10,10 @@ data class Athlete(
     var category: String,
     var frontfoot: String,
     var country: String,
+    var tricks: String,
+    var fall: Boolean,
+    var execution: String,
+    var intensity: String,
+    var comprehension: String,
+    var score: Double,
 ) : Parcelable

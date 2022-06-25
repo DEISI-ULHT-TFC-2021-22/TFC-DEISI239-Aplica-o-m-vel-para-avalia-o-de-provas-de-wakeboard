@@ -7,11 +7,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.data.AthleteDatabase
-import tfc2022.judgingapp_21800876.data.AthleteModel
+import tfc2022.judgingapp_21800876.data.Model
 
-class AthleteViewModel(application: Application) : AndroidViewModel(application){
+class ViewModel(application: Application) : AndroidViewModel(application){
 
-    private val model = AthleteModel(
+    private val model = Model(
         AthleteDatabase.getInstance(application).athleteDao()
     )
 
@@ -43,6 +43,14 @@ class AthleteViewModel(application: Application) : AndroidViewModel(application)
         model.addHistory(trick)
     }
 
+    fun addListOfTricks(trick : String){
+        model.addListOfTricks(trick)
+    }
+
+    fun getAthleteListOfTricks(): String {
+        return model.athleteListOfTricks
+    }
+
     fun getAthletes(callback: (List<Athlete>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             model.getAthletes(callback)
@@ -51,5 +59,25 @@ class AthleteViewModel(application: Application) : AndroidViewModel(application)
 
     fun addAthlete(athlete : Athlete){
         model.addAthlete(athlete)
+    }
+
+    fun updateTricks(tricks : String, name : String){
+        model.updateTricks(tricks, name)
+    }
+
+    fun updateExecution(execution : String, name : String){
+        model.updateExecution(execution, name)
+    }
+
+    fun updateIntensity(intensity : String, name : String){
+        model.updateIntensity(intensity, name)
+    }
+
+    fun updateComprehension(comprehension : String, name : String){
+        model.updateComprehension(comprehension, name)
+    }
+
+    fun updateScore(score : Double, name : String){
+        model.updateScore(score, name)
     }
 }

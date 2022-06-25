@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/grey">
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/popup_border">
+        android:background="@drawable/popup_border"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -22,34 +22,50 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Confirm Trick Stats" />
+                android:text="@string/confirm_trick_stats"
+                android:textSize="25sp"
+                android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trick Name:" />
+                android:textSize="25sp"
+                android:text="@string/trick_name" />
 
             <TextView
+                android:id="@+id/trick_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textSize="25sp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Height:" />
+                android:textSize="25sp"
+                android:text="@string/trick_height" />
 
             <TextView
+                android:id="@+id/trick_height"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/blank"
+                android:paddingBottom="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Wave:" />
+                android:textSize="25sp"
+                android:text="@string/trick_wave" />
 
             <TextView
+                android:id="@+id/trick_wave"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/blank"
+                android:paddingBottom="15dp"/>
 
         </LinearLayout>
 
@@ -68,8 +84,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Define Height"
-                    android:textAlignment="center"/>
+                    android:text="@string/trick_define_heitght"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:paddingBottom="10dp"/>
 
             </LinearLayout>
 
@@ -82,8 +100,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Define Wave"
-                    android:textAlignment="center"/>
+                    android:text="@string/trick_define_wave"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:paddingBottom="10dp"/>
 
             </LinearLayout>
 
@@ -102,7 +122,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/button_height_upx2"
+                    android:id="@+id/button_height_up2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -212,11 +232,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button_confirm"
+                    android:id="@+id/button_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Cancel"/>
+                    android:textSize="25sp"
+                    android:text="@string/cancel_button"/>
 
             </LinearLayout>
 
@@ -227,11 +248,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button_dismiss"
+                    android:id="@+id/button_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Confirm"/>
+                    android:textSize="25sp"
+                    android:text="@string/confirm_button"/>
 
             </LinearLayout>
 

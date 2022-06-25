@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Main -->
     <string name="drawer_open">Open</string>
     <string name="app_name">JudgingApp</string>
@@ -280,5 +280,32 @@
 
     <!--Judge Sheet -->
     <string name="athlete_label">Athlete:</string>
+    <string name="history">Tricks History</string>
+    <string name="raleys">Raleys</string>
+    <string name="tantrums">Tantrums</string>
+    <string name="rolls">Rolls</string>
+    <string name="execution">Execution</string>
+    <string name="intensity">Intensity</string>
+    <string name="comprehension">Comprehension</string>
+    <string name="fall_button">FALL</string>
+    <string name="finish_button">Finish Judging</string>
+
+    <!-- Judge Sheet - PopUp -->
+    <string name="confirm_trick_stats">Confirm Trick Stats</string>
+    <string name="trick_name">Trick Name:</string>
+    <string name="trick_height">Height:</string>
+    <string name="blank">(Blank)</string>
+    <string name="trick_wave">Wave:</string>
+    <string name="trick_define_heitght">Define Height</string>
+    <string name="trick_define_wave">Define Wave</string>
+    <string name="cancel_button" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="confirm_button">CONFIRM</string>
+
+    <string name="trick_height_high">High</string>
+    <string name="trick_height_medium">Medium</string>
+    <string name="trick_height_down">Down</string>
+    <string name="trick_wave_left">Left</string>
+    <string name="trick_wave_up">Top</string>
+    <string name="trick_wave_right">Right</string>
 
 </resources>

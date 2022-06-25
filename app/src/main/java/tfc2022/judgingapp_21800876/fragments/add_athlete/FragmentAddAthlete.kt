@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import tfc2022.judgingapp_21800876.R
-import tfc2022.judgingapp_21800876.AthleteViewModel
+import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentAddAthleteBinding
 
+
 private lateinit var binding : FragmentAddAthleteBinding
-private lateinit var athleteViewModel : AthleteViewModel
+private lateinit var viewModel : ViewModel
 
 class AddAthleteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,7 +32,7 @@ class AddAthleteFragment : Fragment() {
         binding = FragmentAddAthleteBinding.bind(view)
 
         //ViewModel
-        athleteViewModel = ViewModelProvider(this)[AthleteViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
         return binding.root
     }
 
@@ -40,7 +42,7 @@ class AddAthleteFragment : Fragment() {
         binding.buttonSave.setOnClickListener{ saveAthlete() }
         categorySpinnerSetup()
         frontfootSpinnerSetup()
-        countrySpinnerSetup()
+        countryAutoComplete()
     }
 
     private fun categorySpinnerSetup(){
@@ -67,16 +69,23 @@ class AddAthleteFragment : Fragment() {
         }
     }
 
-    private fun countrySpinnerSetup(){
-        val spinner: Spinner = binding.spinnerCountry
+    private fun countryAutoComplete(){
+        val auto: AutoCompleteTextView = binding.countryInput
         ArrayAdapter.createFromResource(
             requireActivity(),
             R.array.country_array,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_dropdown_item_1line
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+            adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            auto.setAdapter(adapter)
         }
+    }
+
+    private fun validateForm(name: String, age: String): Boolean {
+        if(name == "" || age == ""){
+            return false
+        }
+        return true
     }
 
     private fun saveAthlete(){
@@ -84,12 +93,18 @@ class AddAthleteFragment : Fragment() {
         val age = binding.ageInput.text.toString()
         val category = binding.spinnerCategory.selectedItem.toString()
         val frontfoot = binding.spinnerFrontFoot.selectedItem.toString()
-        val country = binding.spinnerCountry.selectedItem.toString()
+        val country = binding.countryInput.text.toString()
 
-        athleteViewModel.addAthlete(Athlete(name,age,category,frontfoot,country))
+        if(validateForm(name, age)) {
+            viewModel.addAthlete(Athlete(name, age, category, frontfoot, country, "",
+                false, "", "", "", 0.0))
 
-        Toast.makeText(activity, "Athlete registered!", Toast.LENGTH_SHORT).show()
-        binding.nameInput.text.clear()
-        binding.ageInput.text.clear()
+            Toast.makeText(activity, "Athlete registered!", Toast.LENGTH_SHORT).show()
+            binding.nameInput.text.clear()
+            binding.ageInput.text.clear()
+            binding.countryInput.text.clear()
+        }else{
+            Toast.makeText(activity, "Name and Age required.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -13,12 +13,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.NavigationManager
 import tfc2022.judgingapp_21800876.R
-import tfc2022.judgingapp_21800876.AthleteViewModel
+import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentSelectAthleteBinding
 
 private lateinit var binding : FragmentSelectAthleteBinding
-private lateinit var athleteViewModel : AthleteViewModel
+private lateinit var viewModel : ViewModel
 
 class SelectAthleteFragment : Fragment() {
     private val adapterAthlete = AdapterAthleteList(onClick = ::onItemClick)
@@ -34,7 +34,7 @@ class SelectAthleteFragment : Fragment() {
         binding = FragmentSelectAthleteBinding.bind(view)
 
         //ViewModel
-        athleteViewModel = ViewModelProvider(this)[AthleteViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ViewModel::class.java]
         return binding.root
     }
 
@@ -42,7 +42,7 @@ class SelectAthleteFragment : Fragment() {
         super.onStart()
         binding.athleteList.layoutManager = LinearLayoutManager(requireContext())
         binding.athleteList.adapter = adapterAthlete
-        athleteViewModel.getAthletes{ updateListAthlete(it) }
+        viewModel.getAthletes{ updateListAthlete(it) }
     }
 
     private fun onItemClick(athlete: Athlete) {
