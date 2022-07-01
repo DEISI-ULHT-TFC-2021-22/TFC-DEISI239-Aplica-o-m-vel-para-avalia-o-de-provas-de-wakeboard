@@ -68,8 +68,8 @@ class Model(private val dao: AthleteDao) {
         history.add(trick)
     }
 
-    fun addListOfTricks(trick : String){
-        athleteListOfTricks += "$trick, "
+    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String){
+        athleteListOfTricks += "$trick ($trickHeight, $trickWave), "
     }
 
     fun addAthlete(athlete : Athlete){
