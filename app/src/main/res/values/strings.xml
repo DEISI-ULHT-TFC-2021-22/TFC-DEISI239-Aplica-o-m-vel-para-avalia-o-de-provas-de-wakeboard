@@ -277,6 +277,19 @@
         <item>Zambia</item>
         <item>Zimbabwe</item>
     </string-array>
+    <string-array name="category_array_plus_all">
+        <item>All Categories</item>
+        <item>Open Division (Open Men)</item>
+        <item>Open Division (Open Women)</item>
+        <item>U14 – 14 and Under (Boys)</item>
+        <item>U14 – 14 and Under (Girls)</item>
+        <item>U18 – 18 years and Under (Junior Men)</item>
+        <item>U18 – 18 years and Under (Junior Women)</item>
+        <item>O30 – 30 Years and Over (Master Men)</item>
+        <item>O30 – 30 Years and Over (Master Women)</item>
+        <item>O40 – 40 Years and Over (Veteran Men)</item>
+        <item>O40 – 40 Years and Over (Veteran Women)</item>
+    </string-array>
 
     <!--Judge Sheet -->
     <string name="athlete_label">Athlete:</string>
@@ -308,4 +321,6 @@
     <string name="trick_wave_up">Top</string>
     <string name="trick_wave_right">Right</string>
 
+    <!-- Leaderboard -->
+    <string name="category_filter">Filter by Category:</string>
 </resources>
