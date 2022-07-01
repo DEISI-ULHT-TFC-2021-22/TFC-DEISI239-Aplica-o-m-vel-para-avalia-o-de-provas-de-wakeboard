@@ -38,6 +38,8 @@ class Model(private val dao: AthleteDao) {
 
     var athleteListOfTricks = ""
 
+    private var athletesList : List<AthleteRoom> = emptyList()
+
     fun getRaleys(onFinished: (List<String>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             onFinished(raleys)
@@ -82,6 +84,7 @@ class Model(private val dao: AthleteDao) {
     fun getAthletes(onFinished: (List<Athlete>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             val athletes = dao.getAll()
+            athletesList = athletes
 
             Collections.sort(athletes, Comparator<AthleteRoom> { obj1, obj2 ->
                 obj2.score.compareTo(obj1.score)
@@ -147,5 +150,14 @@ class Model(private val dao: AthleteDao) {
                 }
             }
         }
+    }
+
+    private fun convertAthletes() : List<Athlete>{
+        return athletesList.map { Athlete(it.athlete_name, it.age, it.category, it.frontfoot, it.country,
+            it.tricks, it.fall, it.execution, it.intensity, it.comprehension, it.score) }
+    }
+
+    fun getAllAthletesList() : List<Athlete>{
+        return convertAthletes()
     }
 }

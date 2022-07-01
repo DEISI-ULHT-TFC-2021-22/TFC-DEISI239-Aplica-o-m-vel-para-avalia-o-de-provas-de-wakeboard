@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.data.AthleteDatabase
+import tfc2022.judgingapp_21800876.data.AthleteRoom
 import tfc2022.judgingapp_21800876.data.Model
 
 class ViewModel(application: Application) : AndroidViewModel(application){
@@ -79,5 +80,9 @@ class ViewModel(application: Application) : AndroidViewModel(application){
 
     fun updateScore(score : Double, name : String){
         model.updateScore(score, name)
+    }
+
+    fun getAllAthletesList(): List<Athlete> {
+        return model.getAllAthletesList()
     }
 }

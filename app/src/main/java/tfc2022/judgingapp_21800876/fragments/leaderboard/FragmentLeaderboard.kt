@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.data.AthleteRoom
 import tfc2022.judgingapp_21800876.databinding.FragmentLeaderboardBinding
 
 private lateinit var binding : FragmentLeaderboardBinding
@@ -39,6 +43,7 @@ class LeaderboardFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        categorySpinnerSetup()
         binding.leaderboardList.layoutManager = LinearLayoutManager(requireContext())
         binding.leaderboardList.adapter = adapterLeaderboard
         viewModel.getAthletes{ updateListLeaderboard(it) }
@@ -48,5 +53,44 @@ class LeaderboardFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             adapterLeaderboard.updateItems(athleteList)
         }
+    }
+
+    private fun categorySpinnerSetup(){
+        val spinner: Spinner = binding.spinnerCategory
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                updateListLeaderboard(getAthleteByCategory(spinner.selectedItem.toString()))
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                return
+            }
+        }
+
+        ArrayAdapter.createFromResource(
+            requireActivity(),
+            R.array.category_array_plus_all,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+    }
+
+    fun getAthleteByCategory(category:String): MutableList<Athlete> {
+        if(category == "All Categories") {
+            return viewModel.getAllAthletesList() as MutableList<Athlete>
+        }
+
+        val allAthletes = viewModel.getAllAthletesList()
+        val chosenAthletes = mutableListOf<Athlete>()
+        for(athlete in allAthletes) {
+            if(athlete.category == category) {
+                chosenAthletes.add(athlete)
+            }
+        }
+
+        return chosenAthletes
     }
 }

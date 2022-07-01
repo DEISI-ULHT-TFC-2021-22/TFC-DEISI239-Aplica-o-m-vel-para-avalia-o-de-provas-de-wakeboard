@@ -81,8 +81,8 @@ class AddAthleteFragment : Fragment() {
         }
     }
 
-    private fun validateForm(name: String, age: String): Boolean {
-        if(name == "" || age == ""){
+    private fun validateForm(name: String, age: String, country: String): Boolean {
+        if(name == "" || age == "" || country == ""){
             return false
         }
         return true
@@ -95,7 +95,7 @@ class AddAthleteFragment : Fragment() {
         val frontfoot = binding.spinnerFrontFoot.selectedItem.toString()
         val country = binding.countryInput.text.toString()
 
-        if(validateForm(name, age)) {
+        if(validateForm(name, age, country)) {
             viewModel.addAthlete(Athlete(name, age, category, frontfoot, country, "",
                 false, "", "", "", 0.0))
 
@@ -104,7 +104,7 @@ class AddAthleteFragment : Fragment() {
             binding.ageInput.text.clear()
             binding.countryInput.text.clear()
         }else{
-            Toast.makeText(activity, "Name and Age required.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Name, Age and Country required.", Toast.LENGTH_SHORT).show()
         }
     }
 }
