@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.data.Athlete
 import tfc2022.judgingapp_21800876.data.AthleteDatabase
-import tfc2022.judgingapp_21800876.data.AthleteRoom
 import tfc2022.judgingapp_21800876.data.Model
 
 class ViewModel(application: Application) : AndroidViewModel(application){
@@ -44,8 +43,8 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         model.addHistory(trick)
     }
 
-    fun addListOfTricks(trick : String){
-        model.addListOfTricks(trick)
+    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String){
+        model.addListOfTricks(trick, trickHeight, trickWave)
     }
 
     fun getAthleteListOfTricks(): String {

@@ -1,5 +1,6 @@
 package tfc2022.judgingapp_21800876.fragments.leaderboard
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,14 +24,20 @@ class AdapterLeaderboardList (
     override fun onBindViewHolder(holder: LeaderboardListViewHolder, position: Int) {
         val stringName = "Athlete: " + items[position].name
         val stringTricks = "Tricks Performed: " + items[position].tricks
+        var stringFinalScore = ""
 
         holder.binding.athleteName.text = stringName
+        Log.d("Coisa", stringTricks.dropLast(2))
         holder.binding.athleteTricks.text = stringTricks
 
         val stringScore = "Execution: " + items[position].execution + " Intensity: " +
                 items[position].intensity + " Comprehension: " + items[position].comprehension
 
-        val stringFinalScore = "Final Score is " + items[position].score
+        stringFinalScore = if(!items[position].fall) {
+            "Final Score is " + items[position].score
+        }else{
+            "Fall"
+        }
 
         holder.binding.athleteScore.text = stringScore
         holder.binding.athleteFinalScore.text = stringFinalScore
