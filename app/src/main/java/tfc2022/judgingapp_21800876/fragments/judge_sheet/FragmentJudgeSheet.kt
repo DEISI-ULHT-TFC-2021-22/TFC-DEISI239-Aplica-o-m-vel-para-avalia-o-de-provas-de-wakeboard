@@ -170,7 +170,7 @@ class JudgeSheetFragment : Fragment() {
             }else{
                 viewModel.addHistory(trick)
                 viewModel.getHistory { updateListHistory(it) }
-                viewModel.addListOfTricks(trick)
+                viewModel.addListOfTricks(trick, trickHeight.text.toString(), trickWave.text.toString())
                 trickHeight.text = getString(R.string.blank)
                 trickWave.text = getString(R.string.blank)
                 popupWindow.dismiss()
