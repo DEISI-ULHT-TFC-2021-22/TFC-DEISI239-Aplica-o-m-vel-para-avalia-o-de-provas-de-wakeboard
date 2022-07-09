@@ -16,8 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.ViewModel
-import tfc2022.judgingapp_21800876.data.Athlete
-import tfc2022.judgingapp_21800876.data.AthleteRoom
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentLeaderboardBinding
 
 private lateinit var binding : FragmentLeaderboardBinding

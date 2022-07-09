@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.ViewModel
-import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentAddAthleteBinding
 
 
@@ -96,8 +96,10 @@ class AddAthleteFragment : Fragment() {
         val country = binding.countryInput.text.toString()
 
         if(validateForm(name, age, country)) {
-            viewModel.addAthlete(Athlete(name, age, category, frontfoot, country, "",
-                false, "", "", "", 0.0))
+            viewModel.addAthlete(
+                Athlete(name, age, category, frontfoot, country, "",
+                false, "", "", "", 0.0)
+            )
 
             Toast.makeText(activity, "Athlete registered!", Toast.LENGTH_SHORT).show()
             binding.nameInput.text.clear()

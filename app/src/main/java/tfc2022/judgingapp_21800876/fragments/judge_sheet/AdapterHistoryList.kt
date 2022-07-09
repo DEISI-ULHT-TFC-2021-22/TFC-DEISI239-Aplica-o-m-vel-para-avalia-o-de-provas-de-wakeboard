@@ -3,6 +3,7 @@ package tfc2022.judgingapp_21800876.fragments.judge_sheet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.databinding.ItemTrickBinding
 
 class AdapterHistoryList (
@@ -20,7 +21,12 @@ class AdapterHistoryList (
     }
 
     override fun onBindViewHolder(holder: HistoryListViewHolder, position: Int) {
-        holder.binding.trickName.text = items[position]
+        val string = items[position]
+        val parts = string.split(",")
+
+        holder.binding.trickName.text = parts[0]
+        holder.binding.trickHeight.setImageResource(getIcon(parts[1]))
+        holder.binding.trickWave.setImageResource(getIcon(parts[2]))
     }
 
     override fun getItemCount() = items.size
@@ -28,5 +34,17 @@ class AdapterHistoryList (
     fun updateItems(items: List<String>) {
         this.items = items
         notifyDataSetChanged()
+    }
+
+    private fun getIcon(iconName : String): Int {
+        when(iconName){
+            "High" -> return R.drawable.ic_baseline_keyboard_double_arrow_up_24
+            "Medium" -> return R.drawable.ic_baseline_keyboard_arrow_up_24
+            "Down" -> return R.drawable.ic_baseline_keyboard_arrow_down_24
+            "Left" -> return R.drawable.waves_arrow_left
+            "Top" -> return R.drawable.waves_arrow_up
+            "Right" -> return R.drawable.waves_arrow_right
+        }
+        return R.drawable.ic_baseline_close_24
     }
 }

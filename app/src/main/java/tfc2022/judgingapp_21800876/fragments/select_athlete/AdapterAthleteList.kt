@@ -3,7 +3,7 @@ package tfc2022.judgingapp_21800876.fragments.select_athlete
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.ItemAthleteBinding
 
 class AdapterAthleteList (

@@ -1,4 +1,4 @@
-package tfc2022.judgingapp_21800876.data
+package tfc2022.judgingapp_21800876.data.athlete
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

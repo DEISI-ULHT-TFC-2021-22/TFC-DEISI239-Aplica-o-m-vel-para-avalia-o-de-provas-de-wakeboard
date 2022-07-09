@@ -2,23 +2,26 @@ package tfc2022.judgingapp_21800876.fragments.judge_sheet
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tfc2022.judgingapp_21800876.NavigationManager
-import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.R
-import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.ViewModel
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
+import tfc2022.judgingapp_21800876.data.tantrums.Tantrum
 import tfc2022.judgingapp_21800876.databinding.FragmentJudgeSheetBinding
+import tfc2022.judgingapp_21800876.utils.readJson
 
 private lateinit var binding : FragmentJudgeSheetBinding
 private lateinit var viewModel : ViewModel
@@ -26,16 +29,21 @@ private const val ARG_ATH = "ARG_ATH"
 
 class JudgeSheetFragment : Fragment() {
     private lateinit var athlete : Athlete
-    private val adapterRaley = AdapterRaleyList(onClick = ::onItemClick)
-    private val adapterTantrum = AdapterTantrumList(onClick = ::onItemClick)
-    private val adapterRoll = AdapterRollList(onClick = ::onItemClick)
     private val adapterHistory = AdapterHistoryList()
     private lateinit var popup : View
-    private lateinit var background : ScrollView
+    private lateinit var mainLinearLayout : LinearLayout
+    private lateinit var tantrumList : List<Tantrum>
+    private lateinit var tricksLinearLayout : LinearLayout
+    private var offAxisClick = false
+    private var wrappedClick = false
+    private var switchClick = false
+    private var curentButtonStack : MutableList<Button> = mutableListOf()
+    private var backButtonStack : MutableList<MutableList<Button>> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { athlete = it.getParcelable(ARG_ATH)!! }
+        tantrumList = readJson<List<Tantrum>>(requireContext(),"tantrums.json")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,9 +52,14 @@ class JudgeSheetFragment : Fragment() {
 
         //Layout
         val view = inflater.inflate(R.layout.fragment_judge_sheet, container, false)
-        background = view.findViewById(R.id.scrollView) as ScrollView
-        background.setBackgroundColor(Color.WHITE)
+
+        //MainLinearLayout for background color change + popup
+        mainLinearLayout = view.findViewById(R.id.mainLinear) as LinearLayout
+        mainLinearLayout.setBackgroundColor(Color.WHITE)
         popup = inflater.inflate(R.layout.trick_popup, container, false)
+
+        //LinearLayout for trick tree
+        tricksLinearLayout = view.findViewById(R.id.sheet_tricks) as LinearLayout
 
         //Binding
         binding = FragmentJudgeSheetBinding.bind(view)
@@ -58,77 +71,155 @@ class JudgeSheetFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.raleysList.layoutManager = LinearLayoutManager(requireContext())
-        binding.raleysList.adapter = adapterRaley
-        viewModel.getRaleys{ updateListRaley(it) }
+        binding.historyList.layoutManager = LinearLayoutManager(requireContext(),
+            LinearLayoutManager.HORIZONTAL, false)
 
-        binding.tantrumsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.tantrumsList.adapter = adapterTantrum
-        viewModel.getTantrums{ updateListTantrum(it) }
-
-        binding.rollsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rollsList.adapter = adapterRoll
-        viewModel.getRolls{ updateListRoll(it) }
-
-        binding.historyList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.historyList.adapter = adapterHistory
 
         athlete.let{
             binding.athleteInfoName.text = it.name
-            binding.athleteInfoCountry.text = it.country
             binding.athleteInfoFrontFoot.text = it.frontfoot
         }
 
-        binding.buttonFinish.setOnClickListener { finishJudgeSheet() }
-        binding.buttonFall.setOnClickListener { fallJudgeSheet() }
-    }
+        startButtons()
 
-    private fun fallJudgeSheet(){
-        athlete.fall = true
-        NavigationManager.goToLeaderboardFragment(parentFragmentManager)
-    }
-
-    private fun finishJudgeSheet(){
-        if(validadeJudgeSheet()) {
-            athlete.tricks = viewModel.getAthleteListOfTricks()
-            athlete.execution = binding.executionInput.text.toString()
-            athlete.intensity = binding.intensityInput.text.toString()
-            athlete.comprehension = binding.comprehensionInput.text.toString()
-            athlete.score =
-                calculateScore(athlete.execution, athlete.intensity, athlete.comprehension)
-
-            viewModel.updateTricks(athlete.tricks, athlete.name)
-
-            viewModel.updateExecution(athlete.execution, athlete.name)
-            viewModel.updateIntensity(athlete.intensity, athlete.name)
-            viewModel.updateComprehension(athlete.comprehension, athlete.name)
-
-            viewModel.updateScore(athlete.score, athlete.name)
-
-            NavigationManager.goToLeaderboardFragment(parentFragmentManager)
+        with(binding) {
+            buttonBack.setOnClickListener { minusTreeLevel() }
+            buttonEnd.setOnClickListener {  }
+            buttonGrab.setOnClickListener { setPopUpGrab() }
+            buttonOffAxis.setOnClickListener { buttonAxis(buttonOffAxis) }
+            buttonWrapped.setOnClickListener { buttonWrapped(buttonWrapped) }
+            buttonSwitch.setOnClickListener { buttonSwitch(buttonSwitch) }
+            buttonFall.setOnClickListener { buttonFall() }
         }
     }
 
-    private fun validadeJudgeSheet(): Boolean {
-        if(binding.executionInput.text.toString() == "" || binding.intensityInput.text.toString() == ""
-            || binding.comprehensionInput.text.toString() == ""){
-            Toast.makeText(activity, "Cannot save Sheet without a score", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if(viewModel.getAthleteListOfTricks().isEmpty()){
-            Toast.makeText(activity, "Cannot save Sheet without tricks", Toast.LENGTH_SHORT).show()
-            return false
-        }
-        return true
+    private fun buttonFall(){
+        viewModel.addHistory("Fall,,")
+        viewModel.getHistory { updateListHistory(it) }
+        viewModel.addListOfTricks("Fall","","")
     }
 
-    private fun calculateScore(execution: String, intensity: String, comprehension: String): Double {
-        return (execution.toDouble() + intensity.toDouble() + comprehension.toDouble()) * 3.33
+    private fun buttonAxis(botao : Button){
+        if(offAxisClick){
+            offAxisClick = false
+            botao.setBackgroundColor(botao.context.resources.getColor(R.color.colorPrimary))
+        }else{
+            offAxisClick = true
+            botao.setBackgroundColor(Color.GREEN)
+        }
     }
 
-    private fun setPopUp(trick : String) {
+    private fun buttonWrapped(botao : Button){
+        if(wrappedClick){
+            wrappedClick = false
+            botao.setBackgroundColor(botao.context.resources.getColor(R.color.colorPrimary))
+        }else{
+            wrappedClick = true
+            botao.setBackgroundColor(Color.GREEN)
+        }
+    }
+
+    private fun buttonSwitch(botao : Button){
+        if(switchClick){
+            switchClick = false
+            botao.setBackgroundColor(botao.context.resources.getColor(R.color.colorPrimary))
+        }else{
+            switchClick = true
+            botao.setBackgroundColor(Color.GREEN)
+        }
+    }
+
+    private fun minusTreeLevel(){
+        //tricksLinearLayout.removeAllViews()
+        TODO()
+    }
+
+    private fun startButtons(){
+        createButton(1, "HS", false)
+        createButton(2, "TS", false)
+    }
+
+    private fun createButton(id : Int, text : String, finish : Boolean){
+        val botao = Button(requireContext())
+        botao.tag = id
+        botao.text = text
+        botao.textSize = 25F
+        botao.setTextColor(Color.WHITE)
+        botao.setBackgroundColor(botao.context.resources.getColor(R.color.colorPrimary))
+
+        if(finish) {
+            botao.setOnClickListener { setPopUpTrick(text) }
+        }else{
+            botao.setOnClickListener { createTree(botao) }
+        }
+
+        if(id == 1 || id == 2){
+            val space = Space(requireContext())
+
+            tricksLinearLayout.addView(
+                botao, LinearLayoutCompat.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+
+            tricksLinearLayout.addView(space, LinearLayoutCompat.LayoutParams(50, 50))
+        }else {
+            curentButtonStack.add(botao)
+        }
+    }
+
+    private fun createTree(botao : Button){
+        for (tantrum in tantrumList){
+            if(tantrum.parent[0] == botao.tag){
+                if(!tantrum.isManoeuvre) {
+                    createButton(tantrum.id, tantrum.shortname, false)
+                }else{
+                    createButton(tantrum.id, tantrum.shortname, true)
+                }
+            }
+        }
+        showTree()
+    }
+
+    private fun showTree(){
+        backButtonStack.toMutableList().add(curentButtonStack)
+        tricksLinearLayout.removeAllViews()
+
+        for(botao in curentButtonStack) {
+            val space = Space(requireContext())
+
+            tricksLinearLayout.addView(
+                botao, LinearLayoutCompat.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+
+            tricksLinearLayout.addView(space, LinearLayoutCompat.LayoutParams(50, 50))
+        }
+
+        Log.d("Stack Current = ", curentButtonStack.toString())
+
+        curentButtonStack.clear()
+
+        Log.d("Stack Back = ", backButtonStack.toString())
+    }
+
+    private fun setPopUpGrab(){
+
+    }
+
+    private fun setPopUpTrick(trick : String) {
         val width = LinearLayout.LayoutParams.WRAP_CONTENT
         val height = LinearLayout.LayoutParams.WRAP_CONTENT
+
+        popup.apply {
+            if (parent != null) {
+                (parent as ViewGroup).removeView(this)
+            }
+        }
 
         val popupWindow = PopupWindow(popup, width, height)
 
@@ -157,53 +248,30 @@ class JudgeSheetFragment : Fragment() {
         val cancelButton = popup.findViewById(R.id.button_cancel) as Button
         val confirmButton = popup.findViewById(R.id.button_confirm) as Button
 
-        cancelButton.setOnClickListener{onButtonClick(false, trick,trickHeight, trickWave, popupWindow)}
+        cancelButton.setOnClickListener{onButtonPopUpClick(false, trick,trickHeight, trickWave, popupWindow)}
 
-        confirmButton.setOnClickListener{onButtonClick(true, trick,trickHeight, trickWave, popupWindow)}
+        confirmButton.setOnClickListener{onButtonPopUpClick(true, trick,trickHeight, trickWave, popupWindow)}
     }
 
-    private fun onButtonClick(button: Boolean, trick: String, trickHeight: TextView,
-                              trickWave: TextView, popupWindow: PopupWindow) {
+    private fun onButtonPopUpClick(button: Boolean, trick: String, trickHeight: TextView,
+                                   trickWave: TextView, popupWindow: PopupWindow) {
         if(button){
             if(trickHeight.text == "(Blank)" || trickWave.text == "(Blank)") {
                 Toast.makeText(activity, "Cannot save Trick without Height or Wave", Toast.LENGTH_SHORT).show()
             }else{
-                viewModel.addHistory(trick)
+                viewModel.addHistory("$trick,${trickHeight.text},${trickWave.text}")
                 viewModel.getHistory { updateListHistory(it) }
                 viewModel.addListOfTricks(trick, trickHeight.text.toString(), trickWave.text.toString())
                 trickHeight.text = getString(R.string.blank)
                 trickWave.text = getString(R.string.blank)
                 popupWindow.dismiss()
-                background.setBackgroundColor(Color.WHITE)
+                mainLinearLayout.setBackgroundColor(Color.WHITE)
             }
         }else{
             trickHeight.text = getString(R.string.blank)
             trickWave.text = getString(R.string.blank)
             popupWindow.dismiss()
-            background.setBackgroundColor(Color.WHITE)
-        }
-    }
-
-    private fun onItemClick(trick: String) {
-        background.setBackgroundColor(Color.GRAY)
-        setPopUp(trick)
-    }
-
-    private fun updateListRaley(raleyList : List<String>){
-        CoroutineScope(Dispatchers.Main).launch {
-            adapterRaley.updateItems(raleyList)
-        }
-    }
-
-    private fun updateListTantrum(tantrumList : List<String>){
-        CoroutineScope(Dispatchers.Main).launch {
-            adapterTantrum.updateItems(tantrumList)
-        }
-    }
-
-    private fun updateListRoll(rollList : List<String>){
-        CoroutineScope(Dispatchers.Main).launch {
-            adapterRoll.updateItems(rollList)
+            mainLinearLayout.setBackgroundColor(Color.WHITE)
         }
     }
 
