@@ -1,4 +1,4 @@
-package tfc2022.judgingapp_21800876.data
+package tfc2022.judgingapp_21800876.data.athlete
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,15 +14,6 @@ interface AthleteDao {
 
     @Query("UPDATE athlete set tricks =:tricks WHERE uuid = :uuid")
     suspend fun updateTricks(uuid: String, tricks : String)
-
-    @Query("UPDATE athlete set execution =:execution WHERE uuid = :uuid")
-    suspend fun updateExecution(uuid: String, execution : String)
-
-    @Query("UPDATE athlete set intensity =:intensity WHERE uuid = :uuid")
-    suspend fun updateIntensity(uuid: String, intensity : String)
-
-    @Query("UPDATE athlete set comprehension =:comprehension WHERE uuid = :uuid")
-    suspend fun updateComprehension(uuid: String, comprehension : String)
 
     @Query("UPDATE athlete set score =:score WHERE uuid = :uuid")
     suspend fun updateScore(uuid: String, score : Double)

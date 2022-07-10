@@ -5,33 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tfc2022.judgingapp_21800876.data.Athlete
-import tfc2022.judgingapp_21800876.data.AthleteDatabase
-import tfc2022.judgingapp_21800876.data.Model
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
+import tfc2022.judgingapp_21800876.data.athlete.AthleteDatabase
 
 class ViewModel(application: Application) : AndroidViewModel(application){
 
     private val model = Model(
         AthleteDatabase.getInstance(application).athleteDao()
     )
-
-    fun getRaleys(onFinished: (List<String>) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            model.getRaleys(onFinished)
-        }
-    }
-
-    fun getTantrums(onFinished: (List<String>) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            model.getTantrums(onFinished)
-        }
-    }
-
-    fun getRolls(onFinished: (List<String>) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            model.getRolls(onFinished)
-        }
-    }
 
     fun getHistory(onFinished: (List<String>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -43,8 +24,9 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         model.addHistory(trick)
     }
 
-    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String){
-        model.addListOfTricks(trick, trickHeight, trickWave)
+    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String, stats : String){
+
+        model.addListOfTricks(trick, trickHeight, trickWave, stats)
     }
 
     fun getAthleteListOfTricks(): String {
@@ -63,18 +45,6 @@ class ViewModel(application: Application) : AndroidViewModel(application){
 
     fun updateTricks(tricks : String, name : String){
         model.updateTricks(tricks, name)
-    }
-
-    fun updateExecution(execution : String, name : String){
-        model.updateExecution(execution, name)
-    }
-
-    fun updateIntensity(intensity : String, name : String){
-        model.updateIntensity(intensity, name)
-    }
-
-    fun updateComprehension(comprehension : String, name : String){
-        model.updateComprehension(comprehension, name)
     }
 
     fun updateScore(score : Double, name : String){

@@ -1,4 +1,4 @@
-package tfc2022.judgingapp_21800876.data
+package tfc2022.judgingapp_21800876.data.athlete
 
 import android.content.Context
 import androidx.room.Database

@@ -2,7 +2,7 @@ package tfc2022.judgingapp_21800876
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.fragments.add_athlete.AddAthleteFragment
 import tfc2022.judgingapp_21800876.fragments.judge_sheet.JudgeSheetFragment
 import tfc2022.judgingapp_21800876.fragments.leaderboard.LeaderboardFragment
