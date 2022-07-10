@@ -1,0 +1,106 @@
+[
+  {
+  "id": 1,
+  "shortname": "HS",
+  "description": "Heel Side",
+  "isManoeuvre": false,
+  "isQualifier": true,
+  "parent" : [0]
+  },
+  {
+    "id": 2,
+    "shortname": "TS",
+    "description": "Toe Side",
+    "isManoeuvre": false,
+    "isQualifier": true,
+    "parent" : [0]
+  },
+  {
+    "id": 3,
+    "shortname": "Tamtrum",
+    "description": "Tamtrum",
+    "isManoeuvre": false,
+    "isQualifier": true,
+    "parent" : [1]
+  },
+  {
+    "id": 4,
+    "shortname": "Tantrum",
+    "description": "Tantrum",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [3]
+  },
+  {
+    "id": 5,
+    "shortname": "BS",
+    "description": "Back Side",
+    "isManoeuvre": false,
+    "isQualifier": true,
+    "parent" : [3]
+  },
+  {
+    "id": 6,
+    "shortname": "FS",
+    "description": "Front Side",
+    "isManoeuvre": false,
+    "isQualifier": true,
+    "parent" : [3]
+  },
+  {
+    "id": 7,
+    "shortname": "MD",
+    "description": "360 Moby Dick",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [5]
+  },
+  {
+    "id": 8,
+    "shortname": "Ol",
+    "description": "360 Olé",
+    "isManoeuvre": false,
+    "isQualifier": true,
+    "parent" : [5]
+  },
+  {
+    "id": 9,
+    "shortname": "SM",
+    "description": "360 Back Hand Olé",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [5]
+  },
+  {
+    "id": 10,
+    "shortname": "WB",
+    "description": "Whirlybird",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [8]
+  },
+  {
+    "id": 11,
+    "shortname": "CR",
+    "description": "Rewind 180",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [8]
+  },
+  {
+    "id": 12,
+    "shortname": "T2F",
+    "description": "180 Tamtrum 2 fakie",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [2]
+  },
+  {
+    "id": 13,
+    "shortname": "BDB",
+    "description": "360 Billion Dollar Baby",
+    "isManoeuvre": true,
+    "isQualifier": false,
+    "parent" : [2]
+  }
+]

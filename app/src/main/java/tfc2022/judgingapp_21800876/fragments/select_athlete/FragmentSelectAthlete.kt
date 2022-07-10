@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.NavigationManager
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.ViewModel
-import tfc2022.judgingapp_21800876.data.Athlete
+import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentSelectAthleteBinding
 
 private lateinit var binding : FragmentSelectAthleteBinding

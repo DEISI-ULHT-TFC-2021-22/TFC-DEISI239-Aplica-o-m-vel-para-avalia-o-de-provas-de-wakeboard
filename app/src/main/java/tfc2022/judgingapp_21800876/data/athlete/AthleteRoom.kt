@@ -1,4 +1,4 @@
-package tfc2022.judgingapp_21800876.data
+package tfc2022.judgingapp_21800876.data.athlete
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -17,6 +17,6 @@ data class AthleteRoom(
     var fall: Boolean,
     var execution: String,
     var intensity: String,
-    var comprehension: String,
+    var composition: String,
     var score: Double
 )

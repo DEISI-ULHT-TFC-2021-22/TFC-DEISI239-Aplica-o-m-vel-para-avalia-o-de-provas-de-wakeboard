@@ -299,7 +299,7 @@
     <string name="rolls">Rolls</string>
     <string name="execution">Execution</string>
     <string name="intensity">Intensity</string>
-    <string name="comprehension">Comprehension</string>
+    <string name="composition">Composition</string>
     <string name="fall_button">FALL</string>
     <string name="finish_button">Finish Judging</string>
 
@@ -323,4 +323,17 @@
 
     <!-- Leaderboard -->
     <string name="category_filter">Filter by Category:</string>
+
+    <!-- New JudgeSheet -->
+    <string name="inverts">Inverts:</string>
+    <string name="rotations">Rotations:</string>
+    <string name="mobes">Mobes:</string>
+    <string name="off_axis">OFF-AXIS</string>
+    <string name="wrapped">WRAPPED</string>
+    <string name="switchButton">SWITCH</string>
+    <string name="fall">FALL</string>
+    <string name="back">BACK</string>
+    <string name="end">END</string>
+    <string name="grab">Grab</string>
+    <string name="select_grab">Select Grab</string>
 </resources>

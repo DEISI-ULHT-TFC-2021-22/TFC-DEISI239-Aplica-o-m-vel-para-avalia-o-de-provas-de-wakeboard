@@ -1,4 +1,4 @@
-package tfc2022.judgingapp_21800876.data
+package tfc2022.judgingapp_21800876.data.athlete
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -14,6 +14,6 @@ data class Athlete(
     var fall: Boolean,
     var execution: String,
     var intensity: String,
-    var comprehension: String,
+    var composition: String,
     var score: Double,
 ) : Parcelable

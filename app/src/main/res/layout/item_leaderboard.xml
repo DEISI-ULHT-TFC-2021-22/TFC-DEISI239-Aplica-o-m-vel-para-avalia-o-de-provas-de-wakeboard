@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/athlete"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -7,8 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/trick_card"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/athlete_name"
@@ -31,31 +30,101 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp">
 
         <TextView
-            android:id="@+id/athlete_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:includeFontPadding="false"
+            android:textSize="25sp"
+            tools:ignore="NestedWeights"
+            android:gravity="center"
+            android:text="@string/execution"/>
+
+        <EditText
+            android:id="@+id/execution_input"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/points_border"
+            android:gravity="center"
+            android:importantForAutofill="no"
+            android:inputType="number"
             android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:includeFontPadding="false"
+            android:textSize="25sp"
+            tools:ignore="NestedWeights"
+            android:gravity="center"
+            android:text="@string/intensity"/>
+
+        <EditText
+            android:id="@+id/composition_input"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textSize="25sp"
+            android:background="@drawable/points_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:includeFontPadding="false"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:text="@string/composition"/>
+
+        <EditText
+            android:id="@+id/intensity_input"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textSize="25sp"
+            android:background="@drawable/points_border"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/athlete_final_score"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
+            android:id="@+id/final_score"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold">
+        </TextView>
+
+        <Button
+            android:id="@+id/save_score"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent"
+            android:text="@string/button_save"
+            android:textSize="25sp">
+        </Button>
 
     </LinearLayout>
 
