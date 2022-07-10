@@ -50,7 +50,7 @@ class LeaderboardFragment : Fragment() {
 
     private fun updateListLeaderboard(athleteList : List<Athlete>){
         CoroutineScope(Dispatchers.Main).launch {
-            adapterLeaderboard.updateItems(athleteList)
+            adapterLeaderboard.updateItems(athleteList, viewModel)
         }
     }
 

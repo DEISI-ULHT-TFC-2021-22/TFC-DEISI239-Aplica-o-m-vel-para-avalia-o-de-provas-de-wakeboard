@@ -4,8 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.ItemLeaderboardBinding
+
+private lateinit var model : ViewModel
 
 class AdapterLeaderboardList (
     private var items: List<Athlete> = listOf())
@@ -24,29 +27,32 @@ class AdapterLeaderboardList (
     override fun onBindViewHolder(holder: LeaderboardListViewHolder, position: Int) {
         val stringName = "Athlete: " + items[position].name
         val stringTricks = "Tricks Performed: " + items[position].tricks
-        var stringFinalScore = ""
 
         holder.binding.athleteName.text = stringName
-        Log.d("Coisa", stringTricks.dropLast(2))
-        holder.binding.athleteTricks.text = stringTricks
+        holder.binding.athleteTricks.text = stringTricks.dropLast(2)
 
-        val stringScore = "Execution: " + items[position].execution + " Intensity: " +
-                items[position].intensity + " Comprehension: " + items[position].comprehension
+        holder.binding.saveScore.setOnClickListener { calculateScore(items[position], holder) }
 
-        stringFinalScore = if(!items[position].fall) {
-            "Final Score is " + items[position].score
-        }else{
-            "Fall"
-        }
-
-        holder.binding.athleteScore.text = stringScore
-        holder.binding.athleteFinalScore.text = stringFinalScore
+        holder.binding.finalScore.text = "Final Score: " + items[position].score.toString()
     }
 
     override fun getItemCount() = items.size
 
-    fun updateItems(items: List<Athlete>) {
+    private fun calculateScore(athlete: Athlete, holder: LeaderboardListViewHolder){
+
+        model.updateScore((
+                holder.binding.executionInput.text.toString().toDouble() +
+                holder.binding.intensityInput.text.toString().toDouble() +
+                holder.binding.intensityInput.text.toString().toDouble()) * 3.33, athlete.name)
+
+        Log.d("Score = ", athlete.score.toString())
+
+        holder.binding.finalScore.text = "Final Score: " + athlete.score.toString()
+    }
+
+    fun updateItems(items: List<Athlete>, viewModel : ViewModel) {
         this.items = items
+        model = viewModel
         notifyDataSetChanged()
     }
 }

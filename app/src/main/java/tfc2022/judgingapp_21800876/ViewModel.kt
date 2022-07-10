@@ -24,8 +24,9 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         model.addHistory(trick)
     }
 
-    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String){
-        model.addListOfTricks(trick, trickHeight, trickWave)
+    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String, stats : String){
+
+        model.addListOfTricks(trick, trickHeight, trickWave, stats)
     }
 
     fun getAthleteListOfTricks(): String {
@@ -44,18 +45,6 @@ class ViewModel(application: Application) : AndroidViewModel(application){
 
     fun updateTricks(tricks : String, name : String){
         model.updateTricks(tricks, name)
-    }
-
-    fun updateExecution(execution : String, name : String){
-        model.updateExecution(execution, name)
-    }
-
-    fun updateIntensity(intensity : String, name : String){
-        model.updateIntensity(intensity, name)
-    }
-
-    fun updateComprehension(comprehension : String, name : String){
-        model.updateComprehension(comprehension, name)
     }
 
     fun updateScore(score : Double, name : String){

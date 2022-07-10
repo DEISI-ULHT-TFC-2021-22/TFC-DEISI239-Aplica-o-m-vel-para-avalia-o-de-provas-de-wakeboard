@@ -27,6 +27,7 @@ class AdapterHistoryList (
         holder.binding.trickName.text = parts[0]
         holder.binding.trickHeight.setImageResource(getIcon(parts[1]))
         holder.binding.trickWave.setImageResource(getIcon(parts[2]))
+        holder.binding.trickStats.text = parts[3]
     }
 
     override fun getItemCount() = items.size

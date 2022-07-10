@@ -14,6 +14,6 @@ data class Athlete(
     var fall: Boolean,
     var execution: String,
     var intensity: String,
-    var comprehension: String,
+    var composition: String,
     var score: Double,
 ) : Parcelable

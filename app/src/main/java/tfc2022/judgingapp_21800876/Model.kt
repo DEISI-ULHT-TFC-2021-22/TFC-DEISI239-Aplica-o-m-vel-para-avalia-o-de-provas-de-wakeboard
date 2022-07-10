@@ -26,14 +26,20 @@ class Model(private val dao: AthleteDao) {
         history.add(trick)
     }
 
-    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String){
-        athleteListOfTricks += "$trick ($trickHeight, $trickWave), "
+    fun addListOfTricks(trick: String, trickHeight: String, trickWave: String, stats : String){
+        athleteListOfTricks += if(stats.length == 0 && trick != "Fall") {
+            "$trick ($trickHeight, $trickWave), "
+        }else if(trick == "Fall"){
+            "Fall, "
+        }else{
+            "$trick ($trickHeight, $trickWave) + ($stats), "
+        }
     }
 
     fun addAthlete(athlete : Athlete){
         val athleteRoom = AthleteRoom(athlete_name = athlete.name, age = athlete.age,
             category = athlete.category, frontfoot = athlete.frontfoot, country = athlete.country,
-        tricks = "", fall = false, execution = "", intensity = "", comprehension = "",
+        tricks = "", fall = false, execution = "", intensity = "", composition = "",
         score = 0.0)
 
         CoroutineScope(Dispatchers.IO).launch { dao.insert(athleteRoom) }
@@ -50,7 +56,7 @@ class Model(private val dao: AthleteDao) {
 
             onFinished(athletes.map{
                 Athlete(it.athlete_name, it.age, it.category, it.frontfoot, it.country,
-                it.tricks, it.fall, it.execution, it.intensity, it.comprehension, it.score)
+                it.tricks, it.fall, it.execution, it.intensity, it.composition, it.score)
             })
         }
     }
@@ -61,39 +67,6 @@ class Model(private val dao: AthleteDao) {
             for(athlete in athletes){
                 if(athlete.athlete_name == name){
                     dao.updateTricks(athlete.uuid, tricks)
-                }
-            }
-        }
-    }
-
-    fun updateExecution(execution : String, name : String){
-        CoroutineScope(Dispatchers.IO).launch {
-            val athletes = dao.getAll()
-            for(athlete in athletes){
-                if(athlete.athlete_name == name){
-                    dao.updateExecution(athlete.uuid, execution)
-                }
-            }
-        }
-    }
-
-    fun updateIntensity(intensity : String, name : String){
-        CoroutineScope(Dispatchers.IO).launch {
-            val athletes = dao.getAll()
-            for(athlete in athletes){
-                if(athlete.athlete_name == name){
-                    dao.updateIntensity(athlete.uuid, intensity)
-                }
-            }
-        }
-    }
-
-    fun updateComprehension(comprehension : String, name : String){
-        CoroutineScope(Dispatchers.IO).launch {
-            val athletes = dao.getAll()
-            for(athlete in athletes){
-                if(athlete.athlete_name == name){
-                    dao.updateComprehension(athlete.uuid, comprehension)
                 }
             }
         }
@@ -112,7 +85,7 @@ class Model(private val dao: AthleteDao) {
 
     private fun convertAthletes() : List<Athlete>{
         return athletesList.map { Athlete(it.athlete_name, it.age, it.category, it.frontfoot, it.country,
-            it.tricks, it.fall, it.execution, it.intensity, it.comprehension, it.score) }
+            it.tricks, it.fall, it.execution, it.intensity, it.composition, it.score) }
     }
 
     fun getAllAthletesList() : List<Athlete>{
