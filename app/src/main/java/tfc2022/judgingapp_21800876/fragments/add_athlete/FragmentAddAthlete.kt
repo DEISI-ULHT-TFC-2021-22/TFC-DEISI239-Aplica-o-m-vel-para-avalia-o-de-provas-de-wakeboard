@@ -97,7 +97,7 @@ class AddAthleteFragment : Fragment() {
 
         if(validateForm(name, age, country)) {
             viewModel.addAthlete(
-                Athlete(name, age, category, frontfoot, country, "",
+                Athlete(name, age, category, frontfoot, country, "", "",
                 false, "", "", "", 0.0)
             )
 
