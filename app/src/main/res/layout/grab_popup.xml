@@ -1,162 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="850dp"
+        android:layout_height="450dp"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="230dp"
+        android:layout_marginBottom="172dp"
         android:background="@drawable/popup_border"
-        tools:ignore="UselessParent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/grab_tail"
+            app:layout_constraintStart_toEndOf="@+id/grab_nose"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/prancha"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/grab_tail"
+            android:layout_width="45dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/tail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/grab_nose"
+            android:layout_width="45dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/nose"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/grab_crail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:layout_marginEnd="46dp"
+            android:text="@string/crail"
+            app:layout_constraintEnd_toStartOf="@+id/grab_mute"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/grab_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="65dp"
+            android:text="@string/method"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/grab_method2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/grab_method2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="68dp"
+            android:text="@string/method"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/grab_stalefish"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/grab_stalefish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="66dp"
+            android:text="@string/stalefish"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/grab_tailfish"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/grab_tailfish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginBottom="68dp"
+            android:text="@string/tailfish"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/select_grab"
-                android:textSize="25sp"
-                android:textAlignment="center"/>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/grab_nose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Nose">
-                </Button>
-
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/left_grabs"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingEnd="10dp"
-                tools:ignore="RtlSymmetry">
-
-                <Button
-                    android:id="@+id/grab_method"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Method">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_method2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Method2">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_stalefish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Stalefish">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_tailfish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tailfish">
-                </Button>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/center_grabs"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingEnd="10dp"
-                tools:ignore="RtlSymmetry">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/prancha">
-                </ImageView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/right_grabs"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingStart="10dp"
-                tools:ignore="RtlSymmetry">
-
-                <Button
-                    android:id="@+id/grab_crail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Crail">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_mute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mute">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_indy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Indy">
-                </Button>
-
-                <Button
-                    android:id="@+id/grab_tindy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tindy">
-                </Button>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="4dp"
+            android:text="@string/select_grab"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/grab_tail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Tail">
+        <Button
+            android:id="@+id/grab_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/mute"
+            app:layout_constraintEnd_toStartOf="@+id/grab_indy"
+            app:layout_constraintTop_toBottomOf="@+id/label" />
 
-            </Button>
+        <Button
+            android:id="@+id/grab_indy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/indy"
+            app:layout_constraintEnd_toStartOf="@+id/grab_tindy"
+            app:layout_constraintTop_toBottomOf="@+id/label" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/grab_tindy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:layout_marginEnd="248dp"
+            android:text="@string/tindy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

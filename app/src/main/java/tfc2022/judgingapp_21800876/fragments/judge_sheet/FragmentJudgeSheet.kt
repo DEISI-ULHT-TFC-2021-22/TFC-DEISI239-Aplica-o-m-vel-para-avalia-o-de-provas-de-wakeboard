@@ -40,6 +40,7 @@ class JudgeSheetFragment : Fragment() {
     private var switchClick = ""
     private var curentButtonStack : MutableList<Button> = mutableListOf()
     private var backButtonStack : MutableList<MutableList<Button>> = mutableListOf()
+    private var grabs = "No grab"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +89,8 @@ class JudgeSheetFragment : Fragment() {
         with(binding) {
             buttonBack.setOnClickListener { minusTreeLevel() }
             buttonEnd.setOnClickListener { endJudging() }
-            //buttonGrab.setOnClickListener { setPopUpGrab() }
+            selectedGrabs.text = grabs
+            buttonGrab.setOnClickListener { setPopUpGrab() }
             buttonOffAxis.setOnClickListener { buttonAxis(buttonOffAxis) }
             buttonWrapped.setOnClickListener { buttonWrapped(buttonWrapped) }
             buttonSwitch.setOnClickListener { buttonSwitch(buttonSwitch) }
@@ -123,8 +125,25 @@ class JudgeSheetFragment : Fragment() {
         val tindy = popupGrab.findViewById(R.id.grab_tindy) as Button
         val tail = popupGrab.findViewById(R.id.grab_tail) as Button
 
-        //Salvar em algum lugar
-        tail.setOnClickListener { closeGrab(popupWindow) }
+        nose.setOnClickListener { addGrab(nose.text.toString(), popupWindow) }
+        method.setOnClickListener { addGrab(method.text.toString(), popupWindow) }
+        method2.setOnClickListener { addGrab(method2.text.toString(), popupWindow) }
+        stalefish.setOnClickListener { addGrab(stalefish.text.toString(), popupWindow) }
+        tailfish.setOnClickListener { addGrab(tailfish.text.toString(), popupWindow) }
+        crail.setOnClickListener { addGrab(crail.text.toString(), popupWindow) }
+        mute.setOnClickListener { addGrab(mute.text.toString(), popupWindow) }
+        indy.setOnClickListener { addGrab(indy.text.toString(), popupWindow) }
+        tindy.setOnClickListener { addGrab(tindy.text.toString(), popupWindow) }
+        tail.setOnClickListener { addGrab(tail.text.toString(), popupWindow) }
+    }
+
+    private fun addGrab(grab : String, popupWindow: PopupWindow){
+        if(grabs == "No grab"){
+            grabs = ""
+        }
+        grabs += grab + "\n"
+        binding.selectedGrabs.text = grabs
+        closeGrab(popupWindow)
     }
 
     private fun closeGrab(popupWindow: PopupWindow) {
@@ -136,6 +155,9 @@ class JudgeSheetFragment : Fragment() {
         if(validadeSheet()){
             athlete.tricks = viewModel.getAthleteListOfTricks()
             viewModel.updateTricks(athlete.tricks, athlete.name)
+
+            athlete.grabs = viewModel.getAthleteListOfGrabs()
+            viewModel.updateGrabs(athlete.grabs, athlete.name)
 
             NavigationManager.goToLeaderboardFragment(parentFragmentManager)
         }
@@ -331,14 +353,19 @@ class JudgeSheetFragment : Fragment() {
 
                 viewModel.addListOfTricks(trick, trickHeight.text.toString(),
                     trickWave.text.toString(), offAxisClick+wrappedClick+switchClick)
+                viewModel.addListOfGrabs(grabs)
                 trickHeight.text = getString(R.string.blank)
                 trickWave.text = getString(R.string.blank)
+                grabs = "No grab"
+                binding.selectedGrabs.text = grabs
                 popupWindow.dismiss()
                 cleanConfirm()
             }
         }else{
             trickHeight.text = getString(R.string.blank)
             trickWave.text = getString(R.string.blank)
+            grabs = "No grab"
+            binding.selectedGrabs.text = grabs
             popupWindow.dismiss()
             mainLinearLayout.setBackgroundColor(Color.WHITE)
         }
