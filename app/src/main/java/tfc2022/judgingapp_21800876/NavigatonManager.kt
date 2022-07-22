@@ -8,6 +8,12 @@ import tfc2022.judgingapp_21800876.fragments.judge_sheet.JudgeSheetFragment
 import tfc2022.judgingapp_21800876.fragments.leaderboard.LeaderboardFragment
 import tfc2022.judgingapp_21800876.fragments.select_athlete.SelectAthleteFragment
 
+/* Navigation Manager Object
+*
+* An object that handles changing screens for the drawer menu.
+*
+*/
+
 object NavigationManager {
     private fun placeFragment(fm: FragmentManager, fragment: Fragment) {
         val transition = fm.beginTransaction()

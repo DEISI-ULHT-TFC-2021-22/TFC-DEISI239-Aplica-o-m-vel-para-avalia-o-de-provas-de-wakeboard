@@ -19,6 +19,13 @@ import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentLeaderboardBinding
 
+/* Fragment Leaderboard
+*
+* This class provides the layout for the leaderboard, calls the adapter to update the list
+* and update the score given by judges.
+*
+*/
+
 private lateinit var binding : FragmentLeaderboardBinding
 private lateinit var viewModel : ViewModel
 

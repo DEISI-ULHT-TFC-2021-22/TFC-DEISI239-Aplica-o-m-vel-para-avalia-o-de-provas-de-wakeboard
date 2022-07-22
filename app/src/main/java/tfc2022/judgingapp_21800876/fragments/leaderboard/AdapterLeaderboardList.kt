@@ -12,6 +12,14 @@ import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.ItemLeaderboardBinding
 import kotlin.math.round
 
+/* Adapter for the Leaderboard
+*
+* This class objective is to populate a list with athletes and show all the information needed
+* so judges can have and overview for evaluation.
+*
+*/
+
+
 private lateinit var viewModel : ViewModel
 
 class AdapterLeaderboardList (

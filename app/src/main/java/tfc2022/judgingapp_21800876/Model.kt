@@ -8,6 +8,12 @@ import tfc2022.judgingapp_21800876.data.athlete.AthleteDao
 import tfc2022.judgingapp_21800876.data.athlete.AthleteRoom
 import java.util.*
 
+/* Model
+*
+* Here has the main functions used in the app.
+*
+*/
+
 class Model(private val dao: AthleteDao) {
 
     private val history = mutableListOf<String>()

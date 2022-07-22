@@ -52,64 +52,51 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/grab_crail"
+            android:id="@+id/grab_method_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="46dp"
+            android:layout_marginStart="142dp"
+            android:text="@string/method"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/grab_crail_goofy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
             android:text="@string/crail"
-            app:layout_constraintEnd_toStartOf="@+id/grab_mute"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/grab_method"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="26dp"
-            android:layout_marginBottom="65dp"
-            android:text="@string/method"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/grab_method2"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <Button
-            android:id="@+id/grab_method2"
+            android:id="@+id/grab_mute_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="68dp"
-            android:text="@string/method"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/grab_stalefish"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/grab_stalefish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="66dp"
-            android:text="@string/stalefish"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/grab_tailfish"
+            android:layout_marginStart="54dp"
+            android:text="@string/mute"
+            app:layout_constraintStart_toEndOf="@+id/grab_crail_goofy"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <Button
-            android:id="@+id/grab_tailfish"
+            android:id="@+id/grab_indy_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/indy"
+            app:layout_constraintStart_toEndOf="@+id/grab_mute_goofy"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/grab_tindy_goofy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginEnd="212dp"
-            android:layout_marginBottom="68dp"
-            android:text="@string/tailfish"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/tindy"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/grab_indy_goofy"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/label"
@@ -124,34 +111,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/grab_mute"
+            android:id="@+id/grab_method2_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/mute"
-            app:layout_constraintEnd_toStartOf="@+id/grab_indy"
-            app:layout_constraintTop_toBottomOf="@+id/label" />
+            android:layout_marginStart="29dp"
+            android:text="@string/method"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/grab_method_goofy" />
 
         <Button
-            android:id="@+id/grab_indy"
+            android:id="@+id/grab_stalefish_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/indy"
-            app:layout_constraintEnd_toStartOf="@+id/grab_tindy"
-            app:layout_constraintTop_toBottomOf="@+id/label" />
+            android:layout_marginStart="24dp"
+            android:text="@string/stalefish"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/grab_method2_goofy" />
 
         <Button
-            android:id="@+id/grab_tindy"
+            android:id="@+id/grab_tailfish_goofy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="248dp"
-            android:text="@string/tindy"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="202dp"
+            android:text="@string/tailfish"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/grab_stalefish_goofy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

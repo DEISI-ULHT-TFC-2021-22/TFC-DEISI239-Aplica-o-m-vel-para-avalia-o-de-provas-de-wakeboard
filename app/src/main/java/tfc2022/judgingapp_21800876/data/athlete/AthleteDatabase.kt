@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+// Database for Athletes
+
 @Database(entities = [AthleteRoom::class], version = 1)
 abstract class AthleteDatabase : RoomDatabase() {
 

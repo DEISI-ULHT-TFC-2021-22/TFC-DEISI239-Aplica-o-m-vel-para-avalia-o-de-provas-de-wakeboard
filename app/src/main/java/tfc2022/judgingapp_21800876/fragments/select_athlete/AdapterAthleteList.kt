@@ -6,6 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.ItemAthleteBinding
 
+/* Adapter for the Select Athelete
+*
+* This class objective is to populate a list with athletes so Judges can select the one they
+* are gonna to evaluate next.
+*
+*/
+
 class AdapterAthleteList (
     private var items: List<Athlete> = listOf(),
     private val onClick: (Athlete) -> Unit)

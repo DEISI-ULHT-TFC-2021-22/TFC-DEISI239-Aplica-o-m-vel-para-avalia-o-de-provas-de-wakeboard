@@ -6,6 +6,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
+//Function that reads the trick Json file
+
 inline fun <reified T> readJson(context: Context, path: String): T {
     lateinit var jsonString: String
     try {
