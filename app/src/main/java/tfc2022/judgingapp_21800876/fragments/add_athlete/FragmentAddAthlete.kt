@@ -16,6 +16,13 @@ import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentAddAthleteBinding
 
+/* Fragment Add Athelete
+*
+* This class objective is to add athletes to a database working with ViewModel
+* Evey athlete add is a persistent data for judges to have all the info on the tablet.
+*
+* The information needed to add an athlete is Name, Age, Country, Category, Front Foot
+*/
 
 private lateinit var binding : FragmentAddAthleteBinding
 private lateinit var viewModel : ViewModel
@@ -97,7 +104,7 @@ class AddAthleteFragment : Fragment() {
 
         if(validateForm(name, age, country)) {
             viewModel.addAthlete(
-                Athlete(name, age, category, frontfoot, country, "",
+                Athlete(name, age, category, frontfoot, country, "", "",
                 false, "", "", "", 0.0)
             )
 

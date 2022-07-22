@@ -8,6 +8,12 @@ import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.data.athlete.AthleteDatabase
 
+/* ViewModel that holds all the classes for the Model
+*
+* The objective of this class is to give the code a better view of everything going on in the Model.
+*
+*/
+
 class ViewModel(application: Application) : AndroidViewModel(application){
 
     private val model = Model(
@@ -33,6 +39,22 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         return model.athleteListOfTricks
     }
 
+    fun updateTricks(tricks : String, name : String){
+        model.updateTricks(tricks, name)
+    }
+
+    fun addListOfGrabs(grab: String){
+        model.addListOfGrabs(grab)
+    }
+
+    fun getAthleteListOfGrabs(): String {
+        return model.athleteListOfGrabs
+    }
+
+    fun updateGrabs(grabs : String, name : String){
+        model.updateGrabs(grabs, name)
+    }
+
     fun getAthletes(callback: (List<Athlete>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             model.getAthletes(callback)
@@ -43,12 +65,12 @@ class ViewModel(application: Application) : AndroidViewModel(application){
         model.addAthlete(athlete)
     }
 
-    fun updateTricks(tricks : String, name : String){
-        model.updateTricks(tricks, name)
-    }
-
     fun updateScore(score : Double, name : String){
         model.updateScore(score, name)
+    }
+
+    fun updateStats(execution : String, intensity : String, composition : String, name : String){
+        model.updateStats(execution, intensity, composition, name)
     }
 
     fun getAllAthletesList(): List<Athlete> {

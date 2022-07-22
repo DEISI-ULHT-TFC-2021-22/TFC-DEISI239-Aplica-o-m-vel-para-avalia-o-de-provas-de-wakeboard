@@ -19,9 +19,28 @@ import tfc2022.judgingapp_21800876.NavigationManager
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
-import tfc2022.judgingapp_21800876.data.tantrums.Tantrum
+import tfc2022.judgingapp_21800876.data.tricks.Trick
 import tfc2022.judgingapp_21800876.databinding.FragmentJudgeSheetBinding
 import tfc2022.judgingapp_21800876.utils.readJson
+
+/* Fragment JudgeSheet
+*
+* The main screen of the app.
+* Here Judges can evaluate an athlete while he or she is doing tricks
+*
+* This class is composed of several functions, here is a quick overview:
+*
+* 1 - Athlete info (Name, Front Foot)
+* 2 - Tricks History (Updated when a Judge selects a trick)
+* 3 - Back and End buttons, Back button goes back 1 tree level, End button finishes the evaluation
+* 4 - Trick Tree, here is where judges can create a tree by level and find a trick
+* 5 - Grab button, this button opens another window where the Judge can select a grab if needed
+* 6 - Off-Axis, Wrapped and Switch buttons, complementary buttons for tricks
+* 7 - Fall button, if an athlete fall off the board, this information is added to the history
+* 8 - After selecting a trick another window appears, this window show the trick name, and the
+* Judge can select options for height and wave placement
+*
+*/
 
 private lateinit var binding : FragmentJudgeSheetBinding
 private lateinit var viewModel : ViewModel
@@ -33,18 +52,19 @@ class JudgeSheetFragment : Fragment() {
     private lateinit var popupTrick : View
     private lateinit var popupGrab : View
     private lateinit var mainLinearLayout : LinearLayout
-    private lateinit var tantrumList : List<Tantrum>
+    private lateinit var trickList : List<Trick>
     private lateinit var tricksLinearLayout : LinearLayout
     private var offAxisClick = ""
     private var wrappedClick = ""
     private var switchClick = ""
     private var curentButtonStack : MutableList<Button> = mutableListOf()
     private var backButtonStack : MutableList<MutableList<Button>> = mutableListOf()
+    private var grabs = "No grab"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { athlete = it.getParcelable(ARG_ATH)!! }
-        tantrumList = readJson<List<Tantrum>>(requireContext(),"tantrums.json")
+        trickList = readJson<List<Trick>>(requireContext(),"tricks.json")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -58,7 +78,11 @@ class JudgeSheetFragment : Fragment() {
         mainLinearLayout = view.findViewById(R.id.mainLinear) as LinearLayout
         mainLinearLayout.setBackgroundColor(Color.WHITE)
         popupTrick = inflater.inflate(R.layout.trick_popup, container, false)
-        popupGrab = inflater.inflate(R.layout.grab_popup, container, false)
+        popupGrab = if(athlete.frontfoot == "Left") {
+            inflater.inflate(R.layout.grab_popup_regular, container, false)
+        }else{
+            inflater.inflate(R.layout.grab_popup_goofy, container, false)
+        }
 
         //LinearLayout for trick tree
         tricksLinearLayout = view.findViewById(R.id.sheet_tricks) as LinearLayout
@@ -88,7 +112,8 @@ class JudgeSheetFragment : Fragment() {
         with(binding) {
             buttonBack.setOnClickListener { minusTreeLevel() }
             buttonEnd.setOnClickListener { endJudging() }
-            //buttonGrab.setOnClickListener { setPopUpGrab() }
+            selectedGrabs.text = grabs
+            buttonGrab.setOnClickListener { setPopUpGrab() }
             buttonOffAxis.setOnClickListener { buttonAxis(buttonOffAxis) }
             buttonWrapped.setOnClickListener { buttonWrapped(buttonWrapped) }
             buttonSwitch.setOnClickListener { buttonSwitch(buttonSwitch) }
@@ -113,18 +138,59 @@ class JudgeSheetFragment : Fragment() {
         mainLinearLayout.setBackgroundColor(Color.GRAY)
 
         val nose = popupGrab.findViewById(R.id.grab_nose) as Button
-        val method = popupGrab.findViewById(R.id.grab_method) as Button
-        val method2 = popupGrab.findViewById(R.id.grab_method2) as Button
-        val stalefish = popupGrab.findViewById(R.id.grab_stalefish) as Button
-        val tailfish = popupGrab.findViewById(R.id.grab_tailfish) as Button
-        val crail = popupGrab.findViewById(R.id.grab_crail) as Button
-        val mute = popupGrab.findViewById(R.id.grab_mute) as Button
-        val indy = popupGrab.findViewById(R.id.grab_indy) as Button
-        val tindy = popupGrab.findViewById(R.id.grab_tindy) as Button
         val tail = popupGrab.findViewById(R.id.grab_tail) as Button
 
-        //Salvar em algum lugar
-        tail.setOnClickListener { closeGrab(popupWindow) }
+        if(athlete.frontfoot == "Left") {
+            val methodRegular = popupGrab.findViewById(R.id.grab_method_regular) as Button
+            val method2Regular = popupGrab.findViewById(R.id.grab_method2_regular) as Button
+            val stalefishRegular = popupGrab.findViewById(R.id.grab_stalefish_regular) as Button
+            val tailfishRegular = popupGrab.findViewById(R.id.grab_tailfish_regular) as Button
+            val crailRegular = popupGrab.findViewById(R.id.grab_crail_regular) as Button
+            val muteRegular = popupGrab.findViewById(R.id.grab_mute_regular) as Button
+            val indyRegular = popupGrab.findViewById(R.id.grab_indy_regular) as Button
+            val tindyRegular = popupGrab.findViewById(R.id.grab_tindy_regular) as Button
+
+            methodRegular.setOnClickListener { addGrab(methodRegular.text.toString(), popupWindow) }
+            method2Regular.setOnClickListener { addGrab(method2Regular.text.toString(), popupWindow) }
+            stalefishRegular.setOnClickListener { addGrab(stalefishRegular.text.toString(), popupWindow) }
+            tailfishRegular.setOnClickListener { addGrab(tailfishRegular.text.toString(), popupWindow) }
+            crailRegular.setOnClickListener { addGrab(crailRegular.text.toString(), popupWindow) }
+            muteRegular.setOnClickListener { addGrab(muteRegular.text.toString(), popupWindow) }
+            indyRegular.setOnClickListener { addGrab(indyRegular.text.toString(), popupWindow) }
+            tindyRegular.setOnClickListener { addGrab(tindyRegular.text.toString(), popupWindow) }
+
+        }else {
+            val methodGoofy = popupGrab.findViewById(R.id.grab_method_goofy) as Button
+            val method2Goofy = popupGrab.findViewById(R.id.grab_method2_goofy) as Button
+            val stalefishGoofy = popupGrab.findViewById(R.id.grab_stalefish_goofy) as Button
+            val tailfishGoofy = popupGrab.findViewById(R.id.grab_tailfish_goofy) as Button
+            val crailGoofy = popupGrab.findViewById(R.id.grab_crail_goofy) as Button
+            val muteGoofy = popupGrab.findViewById(R.id.grab_mute_goofy) as Button
+            val indyGoofy = popupGrab.findViewById(R.id.grab_indy_goofy) as Button
+            val tindyGoofy = popupGrab.findViewById(R.id.grab_tindy_goofy) as Button
+
+            nose.setOnClickListener { addGrab(nose.text.toString(), popupWindow) }
+            tail.setOnClickListener { addGrab(tail.text.toString(), popupWindow) }
+
+            methodGoofy.setOnClickListener { addGrab(methodGoofy.text.toString(), popupWindow) }
+            method2Goofy.setOnClickListener { addGrab(method2Goofy.text.toString(), popupWindow) }
+            stalefishGoofy.setOnClickListener { addGrab(stalefishGoofy.text.toString(), popupWindow) }
+            tailfishGoofy.setOnClickListener { addGrab(tailfishGoofy.text.toString(), popupWindow) }
+            crailGoofy.setOnClickListener { addGrab(crailGoofy.text.toString(), popupWindow) }
+            muteGoofy.setOnClickListener { addGrab(muteGoofy.text.toString(), popupWindow) }
+            indyGoofy.setOnClickListener { addGrab(indyGoofy.text.toString(), popupWindow) }
+            tindyGoofy.setOnClickListener { addGrab(tindyGoofy.text.toString(), popupWindow) }
+        }
+
+    }
+
+    private fun addGrab(grab : String, popupWindow: PopupWindow){
+        if(grabs == "No grab"){
+            grabs = ""
+        }
+        grabs += grab + "\n"
+        binding.selectedGrabs.text = grabs
+        closeGrab(popupWindow)
     }
 
     private fun closeGrab(popupWindow: PopupWindow) {
@@ -136,6 +202,9 @@ class JudgeSheetFragment : Fragment() {
         if(validadeSheet()){
             athlete.tricks = viewModel.getAthleteListOfTricks()
             viewModel.updateTricks(athlete.tricks, athlete.name)
+
+            athlete.grabs = viewModel.getAthleteListOfGrabs()
+            viewModel.updateGrabs(athlete.grabs, athlete.name)
 
             NavigationManager.goToLeaderboardFragment(parentFragmentManager)
         }
@@ -244,9 +313,9 @@ class JudgeSheetFragment : Fragment() {
     }
 
     private fun createTree(botao : Button){
-        for (tantrum in tantrumList){
-            if(tantrum.parent[0] == botao.tag){
-                createButton(tantrum.id, tantrum.shortname, tantrum.isManoeuvre)
+        for (trick in trickList){
+            if(trick.parent[0] == botao.tag){
+                createButton(trick.id, trick.shortname, trick.isManoeuvre)
             }
         }
         showTree()
@@ -331,14 +400,19 @@ class JudgeSheetFragment : Fragment() {
 
                 viewModel.addListOfTricks(trick, trickHeight.text.toString(),
                     trickWave.text.toString(), offAxisClick+wrappedClick+switchClick)
+                viewModel.addListOfGrabs(grabs)
                 trickHeight.text = getString(R.string.blank)
                 trickWave.text = getString(R.string.blank)
+                grabs = "No grab"
+                binding.selectedGrabs.text = grabs
                 popupWindow.dismiss()
                 cleanConfirm()
             }
         }else{
             trickHeight.text = getString(R.string.blank)
             trickWave.text = getString(R.string.blank)
+            grabs = "No grab"
+            binding.selectedGrabs.text = grabs
             popupWindow.dismiss()
             mainLinearLayout.setBackgroundColor(Color.WHITE)
         }

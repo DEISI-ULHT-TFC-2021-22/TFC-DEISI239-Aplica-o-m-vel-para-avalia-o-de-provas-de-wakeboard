@@ -30,6 +30,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/athlete_grabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
@@ -55,7 +69,7 @@
             android:background="@drawable/points_border"
             android:gravity="center"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="25sp" />
 
         <TextView
@@ -69,14 +83,14 @@
             android:text="@string/intensity"/>
 
         <EditText
-            android:id="@+id/composition_input"
+            android:id="@+id/intensity_input"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="25sp"
             android:background="@drawable/points_border"/>
 
@@ -90,16 +104,30 @@
             android:text="@string/composition"/>
 
         <EditText
-            android:id="@+id/intensity_input"
+            android:id="@+id/composition_input"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="25sp"
             android:background="@drawable/points_border"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/athlete_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textSize="25sp" />
 
     </LinearLayout>
 

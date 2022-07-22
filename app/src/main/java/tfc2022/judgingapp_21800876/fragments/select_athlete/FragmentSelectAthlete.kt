@@ -17,6 +17,13 @@ import tfc2022.judgingapp_21800876.ViewModel
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.databinding.FragmentSelectAthleteBinding
 
+/* Fragment Select Athlete
+*
+* This is a simples fragment that handles an athlete list from the AddAtheleteFragment.
+* Just a simples list that sends the selected athlete to the Judge Sheet for evaluation.
+*
+*/
+
 private lateinit var binding : FragmentSelectAthleteBinding
 private lateinit var viewModel : ViewModel
 

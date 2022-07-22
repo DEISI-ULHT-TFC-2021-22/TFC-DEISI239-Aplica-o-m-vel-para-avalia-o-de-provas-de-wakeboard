@@ -6,6 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import tfc2022.judgingapp_21800876.R
 import tfc2022.judgingapp_21800876.databinding.ItemTrickBinding
 
+/* Adapter for the History Trick list
+*
+* This class objective is to populate a list with every selected trick, with icons for height and
+* wave.
+*
+*/
+
 class AdapterHistoryList (
     private var items: List<String> = listOf())
     : RecyclerView.Adapter<AdapterHistoryList.HistoryListViewHolder>() {
