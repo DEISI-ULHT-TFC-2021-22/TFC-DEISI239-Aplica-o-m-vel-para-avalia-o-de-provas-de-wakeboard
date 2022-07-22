@@ -3,6 +3,8 @@ package tfc2022.judgingapp_21800876.data.athlete
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+//Athlete normal class, that holds information
+
 @Parcelize
 data class Athlete(
     var name: String,

@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
+//Athlete DAO class, that holds information and keeps data persistent
+
 @Entity(tableName = "athlete")
 data class AthleteRoom(
     @PrimaryKey val uuid: String = UUID.randomUUID().toString(),

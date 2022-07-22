@@ -8,6 +8,12 @@ import kotlinx.coroutines.launch
 import tfc2022.judgingapp_21800876.data.athlete.Athlete
 import tfc2022.judgingapp_21800876.data.athlete.AthleteDatabase
 
+/* ViewModel that holds all the classes for the Model
+*
+* The objective of this class is to give the code a better view of everything going on in the Model.
+*
+*/
+
 class ViewModel(application: Application) : AndroidViewModel(application){
 
     private val model = Model(

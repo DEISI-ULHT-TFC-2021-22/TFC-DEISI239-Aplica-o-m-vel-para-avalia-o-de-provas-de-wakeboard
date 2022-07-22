@@ -7,6 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import tfc2022.judgingapp_21800876.databinding.ActivityMainBinding
 
+/* Main activity
+*
+* Here is where drawer menu is setup, NavigationManager object functions are used as well.
+*
+*/
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

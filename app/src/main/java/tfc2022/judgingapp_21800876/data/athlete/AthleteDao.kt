@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+//DAO SQL-like functions to handle updates and return athletes list
+
 @Dao
 interface AthleteDao {
     @Insert
